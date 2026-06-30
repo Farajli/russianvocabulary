@@ -3,140 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ГЛАГОЛЫ — Rusca Feillər</title>
-<meta name="description" content="Rus dili feillərini öyrənmək üçün interaktiv kart, viktorina və təsriflənmə vasitəsi.">
+<title>ГЛАГОЛЫ — Rusca Lüğət (+ DevOps)</title>
+<meta name="description" content="Rus dili sözlərini öyrənmək üçün interaktiv kart, viktorina və təsriflənmə vasitəsi. DevOps müsahibəsi lüğəti daxildir.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=PT+Sans:wght@400;700&family=PT+Mono&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#141311;
-    --cream:#EFE7D6;
-    --red:#D2351F;
-    --gold:#D9A441;
-    --muted:#9C9384;
+    --ink:#141311; --cream:#EFE7D6; --red:#D2351F; --gold:#D9A441; --muted:#9C9384;
     --line: rgba(239,231,214,0.16);
-    --radius: 2px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--ink);
-    color:var(--cream);
-    font-family:'PT Sans', sans-serif;
-    line-height:1.5;
-  }
-  h1,h2,h3,.display{
-    font-family:'Unbounded', sans-serif;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:0.01em;
-    margin:0;
-  }
+  body{ margin:0; background:var(--ink); color:var(--cream); font-family:'PT Sans', sans-serif; line-height:1.5; }
+  h1,h2,h3,.display{ font-family:'Unbounded', sans-serif; font-weight:800; text-transform:uppercase; letter-spacing:0.01em; margin:0; }
   .mono{font-family:'PT Mono', monospace;}
   a{color:inherit;}
   .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
 
   nav{ position:sticky; top:0; z-index:50; background:var(--ink); border-bottom:1px solid var(--line); }
-  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:60px; }
-  .brand{display:flex; align-items:center; gap:10px; font-family:'Unbounded'; font-weight:800; font-size:15px; letter-spacing:0.04em;}
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:60px; flex-wrap:wrap; }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Unbounded'; font-weight:800; font-size:14px; letter-spacing:0.04em;}
   .brand .dot{width:10px;height:10px;background:var(--red);}
-  .navlinks{display:flex; gap:4px;}
-  .navlinks button{
-    background:none; border:none; color:var(--cream); opacity:0.6;
-    font-family:'PT Sans'; font-weight:700; font-size:13px;
-    text-transform:uppercase; letter-spacing:0.06em;
-    padding:10px 14px; cursor:pointer; transition:opacity .15s;
-  }
+  .navlinks{display:flex; gap:2px; flex-wrap:wrap;}
+  .navlinks button{ background:none; border:none; color:var(--cream); opacity:0.6; font-family:'PT Sans'; font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:0.05em; padding:10px 11px; cursor:pointer; transition:opacity .15s; }
   .navlinks button:hover, .navlinks button.active{opacity:1; color:var(--gold);}
 
-  header.hero{ position:relative; overflow:hidden; border-bottom:1px solid var(--line); padding:90px 0 70px; }
+  header.hero{ position:relative; overflow:hidden; border-bottom:1px solid var(--line); padding:80px 0 64px; }
   header.hero::before{ content:""; position:absolute; top:-40%; right:-12%; width:560px; height:560px; background:var(--red); transform:rotate(28deg); z-index:0; }
   header.hero::after{ content:""; position:absolute; bottom:-50%; right:8%; width:300px; height:300px; background:var(--gold); transform:rotate(28deg); z-index:0; opacity:0.9; }
   .hero-inner{position:relative; z-index:2;}
   .eyebrow{ font-family:'PT Mono'; font-size:13px; letter-spacing:0.18em; color:var(--gold); text-transform:uppercase; margin-bottom:18px; }
-  .hero h1{ font-size:clamp(42px, 8vw, 92px); line-height:0.92; color:var(--cream); }
+  .hero h1{ font-size:clamp(38px, 7vw, 80px); line-height:0.95; color:var(--cream); }
   .hero h1 span{color:var(--ink); -webkit-text-stroke: 2px var(--cream);}
-  .hero p.lead{ max-width:520px; margin-top:24px; font-size:17px; color:var(--cream); opacity:0.85; }
-  .hero-stats{display:flex; gap:36px; margin-top:40px; flex-wrap:wrap;}
+  .hero p.lead{ max-width:560px; margin-top:22px; font-size:16.5px; color:var(--cream); opacity:0.85; }
+  .hero-stats{display:flex; gap:30px; margin-top:36px; flex-wrap:wrap;}
   .hero-stats div{border-left:2px solid var(--red); padding-left:12px;}
-  .hero-stats .num{font-family:'Unbounded'; font-weight:900; font-size:30px; display:block;}
-  .hero-stats .lbl{font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted);}
-  .cta{ display:inline-block; margin-top:38px; background:var(--cream); color:var(--ink); font-family:'Unbounded'; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.06em; padding:16px 30px; border:none; cursor:pointer; transition:transform .15s, background .15s; }
+  .hero-stats .num{font-family:'Unbounded'; font-weight:900; font-size:28px; display:block;}
+  .hero-stats .lbl{font-size:11.5px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted);}
+  .cta{ display:inline-block; margin-top:34px; background:var(--cream); color:var(--ink); font-family:'Unbounded'; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.06em; padding:16px 30px; border:none; cursor:pointer; transition:transform .15s, background .15s; }
   .cta:hover{background:var(--gold); transform:translateY(-2px);}
 
-  section{padding:64px 0; border-bottom:1px solid var(--line);}
-  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:36px; flex-wrap:wrap;}
+  section{padding:60px 0; border-bottom:1px solid var(--line);}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:32px; flex-wrap:wrap;}
   .sec-num{font-family:'PT Mono'; color:var(--red); font-size:14px;}
-  .sec-head h2{font-size:clamp(26px,4vw,40px);}
-  .sec-sub{color:var(--muted); font-size:14px; max-width:520px; margin-top:8px;}
+  .sec-head h2{font-size:clamp(24px,4vw,38px);}
+  .sec-sub{color:var(--muted); font-size:14px; max-width:560px; margin-top:8px;}
 
-  .chips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px;}
-  .chip{ border:1px solid var(--line); background:transparent; color:var(--cream); font-family:'PT Sans'; font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em; padding:8px 14px; cursor:pointer; transition:.15s; }
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px;}
+  .chip{ border:1px solid var(--line); background:transparent; color:var(--cream); font-family:'PT Sans'; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:0.04em; padding:8px 13px; cursor:pointer; transition:.15s; }
   .chip.active{background:var(--red); border-color:var(--red); color:var(--cream);}
+  .chip.pos-chip.active{background:var(--gold); border-color:var(--gold); color:var(--ink);}
 
-  .progress-row{display:flex; align-items:center; gap:14px; margin-bottom:28px;}
+  .progress-row{display:flex; align-items:center; gap:14px; margin-bottom:24px;}
   .progress-bar{flex:1; height:6px; background:var(--line); position:relative; overflow:hidden;}
   .progress-bar i{position:absolute; left:0; top:0; bottom:0; background:var(--gold); width:0%; transition:width .3s;}
   .progress-txt{font-family:'PT Mono'; font-size:12px; color:var(--muted); white-space:nowrap;}
 
   .card-stage{display:flex; flex-direction:column; align-items:center; gap:22px;}
   .flip-zone{width:100%; max-width:480px; perspective:1400px;}
-  .flashcard{ position:relative; width:100%; height:320px; transform-style:preserve-3d; transition:transform .5s cubic-bezier(.4,.2,.2,1); cursor:pointer; }
+  .flashcard{ position:relative; width:100%; height:340px; transform-style:preserve-3d; transition:transform .5s cubic-bezier(.4,.2,.2,1); cursor:pointer; }
   .flashcard.flipped{transform:rotateY(180deg);}
-  .face{ position:absolute; inset:0; backface-visibility:hidden; border:1px solid var(--line); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:26px; }
+  .face{ position:absolute; inset:0; backface-visibility:hidden; border:1px solid var(--line); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:24px; }
   .face.front{background:var(--ink);}
   .face.back{background:var(--cream); color:var(--ink); transform:rotateY(180deg);}
   .face .idx{position:absolute; top:14px; left:16px; font-family:'PT Mono'; font-size:12px; opacity:0.5;}
-  .face .cat-tag{position:absolute; top:14px; right:16px; font-family:'PT Mono'; font-size:11px; color:var(--red); text-transform:uppercase;}
-  .face .ru{font-family:'Unbounded'; font-weight:800; font-size:36px;}
-  .face .translit{font-family:'PT Mono'; font-size:13px; color:var(--gold); margin-top:10px;}
+  .face .cat-tag{position:absolute; top:14px; right:16px; font-family:'PT Mono'; font-size:10.5px; color:var(--red); text-transform:uppercase; text-align:right; max-width:160px;}
+  .face .pos-tag{display:inline-block; font-family:'PT Mono'; font-size:10px; letter-spacing:0.08em; color:var(--gold); border:1px solid var(--gold); padding:3px 8px; margin-bottom:10px; text-transform:uppercase;}
+  .face.back .pos-tag{color:var(--red); border-color:var(--red);}
+  .face .ru{font-family:'Unbounded'; font-weight:800; font-size:32px;}
+  .face .translit{font-family:'PT Mono'; font-size:13px; color:var(--gold); margin-top:8px;}
   .face.back .translit{color:var(--red);}
-  .face .az{font-family:'Unbounded'; font-weight:700; font-size:23px;}
-  .face .example{font-size:13px; margin-top:12px; opacity:0.8; font-style:italic;}
+  .face .az{font-family:'Unbounded'; font-weight:700; font-size:21px;}
+  .face .example{font-size:12.5px; margin-top:10px; opacity:0.8; font-style:italic;}
+  .face .gram{font-size:12px; margin-top:10px; color:var(--red); font-family:'PT Mono';}
   .face .hint{position:absolute; bottom:46px; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; opacity:0.45; font-family:'PT Mono';}
-  .tense-link{
-    position:absolute; bottom:14px; background:var(--ink); color:var(--cream);
-    border:none; font-family:'PT Sans'; font-weight:700; font-size:11.5px;
-    text-transform:uppercase; letter-spacing:0.04em; padding:8px 14px; cursor:pointer;
-  }
+  .tense-link{ position:absolute; bottom:14px; background:var(--ink); color:var(--cream); border:none; font-family:'PT Sans'; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; padding:8px 13px; cursor:pointer; }
   .tense-link:hover{background:var(--red);}
 
   .card-controls{display:flex; gap:10px; align-items:center;}
   .ctrl-btn{ border:1px solid var(--line); background:transparent; color:var(--cream); width:46px; height:46px; font-size:18px; cursor:pointer; transition:.15s; }
   .ctrl-btn:hover{border-color:var(--gold);}
-  .know-btn{ border:1px solid var(--gold); background:transparent; color:var(--gold); font-family:'PT Sans'; font-weight:700; font-size:13px; text-transform:uppercase; padding:13px 22px; cursor:pointer; transition:.15s; letter-spacing:0.04em; }
+  .know-btn{ border:1px solid var(--gold); background:transparent; color:var(--gold); font-family:'PT Sans'; font-weight:700; font-size:13px; text-transform:uppercase; padding:13px 20px; cursor:pointer; transition:.15s; letter-spacing:0.04em; }
   .know-btn:hover{background:var(--gold); color:var(--ink);}
   .know-btn.again{border-color:var(--red); color:var(--red);}
   .know-btn.again:hover{background:var(--red); color:var(--cream);}
 
-  .search-row{margin-bottom:20px;}
-  .search-row input{
-    width:100%; max-width:360px; background:transparent; border:1px solid var(--line); color:var(--cream);
-    font-family:'PT Sans'; font-size:14px; padding:11px 14px; outline:none;
-  }
+  .search-row{margin-bottom:18px;}
+  .search-row input{ width:100%; max-width:360px; background:transparent; border:1px solid var(--line); color:var(--cream); font-family:'PT Sans'; font-size:14px; padding:11px 14px; outline:none; }
   .search-row input:focus{border-color:var(--gold);}
   .search-row input::placeholder{color:var(--muted);}
 
   .verb-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1px; background:var(--line);}
   .verb-cell{background:var(--ink); padding:16px 18px; position:relative;}
   .verb-cell:hover{background:rgba(217,164,65,0.08);}
-  .verb-cell .vru{font-family:'Unbounded'; font-weight:700; font-size:16px; cursor:pointer;}
-  .verb-cell .vtr{font-family:'PT Mono'; font-size:11.5px; color:var(--gold); margin:4px 0;}
-  .verb-cell .vaz{font-size:13px; color:var(--muted);}
+  .verb-cell .vpos{font-family:'PT Mono'; font-size:9.5px; color:var(--gold); letter-spacing:0.06em; text-transform:uppercase;}
+  .verb-cell .vru{font-family:'Unbounded'; font-weight:700; font-size:15.5px; cursor:pointer; margin-top:2px;}
+  .verb-cell .vtr{font-family:'PT Mono'; font-size:11px; color:var(--gold); margin:4px 0;}
+  .verb-cell .vaz{font-size:12.5px; color:var(--muted);}
   .verb-cell.learned{box-shadow:inset 3px 0 0 var(--gold);}
-  .clock-btn{
-    position:absolute; top:14px; right:14px; background:none; border:1px solid var(--line);
-    color:var(--muted); width:26px; height:26px; font-size:12px; cursor:pointer;
-  }
+  .clock-btn{ position:absolute; top:14px; right:14px; background:none; border:1px solid var(--line); color:var(--muted); width:26px; height:26px; font-size:12px; cursor:pointer; }
   .clock-btn:hover{border-color:var(--gold); color:var(--gold);}
 
   .quiz-card{ border:1px solid var(--line); padding:34px; max-width:560px; margin:0 auto; }
   .quiz-meta{display:flex; justify-content:space-between; font-family:'PT Mono'; font-size:12px; color:var(--muted); margin-bottom:18px;}
-  .quiz-q{font-family:'Unbounded'; font-size:30px; font-weight:800; text-align:center; margin:18px 0 30px;}
+  .quiz-q{font-family:'Unbounded'; font-size:28px; font-weight:800; text-align:center; margin:14px 0 26px;}
+  .quiz-pos{display:block; font-family:'PT Mono'; font-size:11px; color:var(--gold); text-align:center; letter-spacing:0.08em; text-transform:uppercase;}
   .quiz-opts{display:grid; gap:10px;}
-  .quiz-opt{ border:1px solid var(--line); background:transparent; color:var(--cream); text-align:left; padding:14px 16px; font-family:'PT Sans'; font-size:15px; font-weight:700; cursor:pointer; transition:.15s; display:flex; align-items:center; gap:12px; }
+  .quiz-opt{ border:1px solid var(--line); background:transparent; color:var(--cream); text-align:left; padding:14px 16px; font-family:'PT Sans'; font-size:14.5px; font-weight:700; cursor:pointer; transition:.15s; display:flex; align-items:center; gap:12px; }
   .quiz-opt span.k{font-family:'PT Mono'; color:var(--red); font-size:13px;}
   .quiz-opt:hover{border-color:var(--gold);}
   .quiz-opt.correct{border-color:var(--gold); background:rgba(217,164,65,0.15);}
@@ -145,10 +119,7 @@
   .streak{font-family:'PT Mono'; font-size:13px; color:var(--gold);}
 
   .conj-select-wrap{margin-bottom:18px;}
-  select#conjSelect{
-    width:100%; max-width:360px; background:var(--ink); border:1px solid var(--line); color:var(--cream);
-    font-family:'PT Sans'; font-weight:700; font-size:15px; padding:12px 14px; outline:none; cursor:pointer;
-  }
+  select#conjSelect{ width:100%; max-width:360px; background:var(--ink); border:1px solid var(--line); color:var(--cream); font-family:'PT Sans'; font-weight:700; font-size:15px; padding:12px 14px; outline:none; cursor:pointer; }
   select#conjSelect:focus{border-color:var(--gold);}
   .conj-table{width:100%; border-collapse:collapse; max-width:560px;}
   .conj-table td, .conj-table th{ border-bottom:1px solid var(--line); padding:13px 4px; font-size:15px; }
@@ -158,13 +129,13 @@
   .conj-note{margin-top:18px; font-size:13px; color:var(--muted); max-width:540px;}
   .conj-empty{font-size:14px; color:var(--muted); max-width:540px; border-left:2px solid var(--red); padding-left:14px; margin:10px 0;}
 
-  footer{padding:40px 0; text-align:center;}
+  footer{padding:36px 0; text-align:center;}
   footer .wrap{font-family:'PT Mono'; font-size:12px; color:var(--muted);}
 
   @media (max-width:640px){
-    .hero-stats{gap:22px;}
-    .flashcard{height:340px;}
-    .face .ru{font-size:28px;}
+    .hero-stats{gap:20px;}
+    .flashcard{height:360px;}
+    .face .ru{font-size:26px;}
   }
 </style>
 </head>
@@ -172,7 +143,7 @@
 
 <nav>
   <div class="wrap">
-    <div class="brand"><span class="dot"></span>ГЛАГОЛЫ · RUSCA FEİLLƏR</div>
+    <div class="brand"><span class="dot"></span>ГЛАГОЛЫ · RUSCA LÜĞƏT</div>
     <div class="navlinks">
       <button data-go="cards" class="active">Kartlar</button>
       <button data-go="browse">Bütün siyahı</button>
@@ -184,12 +155,13 @@
 
 <header class="hero">
   <div class="wrap hero-inner">
-    <div class="eyebrow">01 · ÖYRƏNMƏ ALƏTİ</div>
-    <h1>ГЛАГОЛЫ<br><span>FEİLLƏR</span></h1>
-    <p class="lead">Ən çox işlənən rus feillərini kart çevirərək, viktorina ilə yoxlayaraq və hər sözün İndiki / Keçmiş / Gələcək zaman formasına baxaraq əzbərlə. Hər şey brauzerində yadda saxlanılır.</p>
+    <div class="eyebrow">01 · ÖYRƏNMƏ ALƏTİ · İNDİ DEVOPS LÜĞƏTİ İLƏ</div>
+    <h1>ГЛАГОЛЫ<br><span>+ СЛОВА</span></h1>
+    <p class="lead">Ən çox işlənən rus feillərini, eləcə də DevOps müsahibəsi üçün lazım olan isim, sifət və zərfləri kart çevirərək, viktorina ilə yoxlayaraq öyrən. Feillərin İndiki/Keçmiş/Gələcək zamanına da bax.</p>
     <div class="hero-stats">
-      <div><span class="num" id="statTotal">0</span><span class="lbl">Feil</span></div>
-      <div><span class="num" id="statCat">0</span><span class="lbl">Kateqoriya</span></div>
+      <div><span class="num" id="statTotal">0</span><span class="lbl">Söz</span></div>
+      <div><span class="num" id="statVerb">0</span><span class="lbl">Feil</span></div>
+      <div><span class="num" id="statDevops">0</span><span class="lbl">DevOps sözü</span></div>
       <div><span class="num" id="statLearned">0</span><span class="lbl">Öyrənilib</span></div>
     </div>
     <button class="cta" onclick="document.getElementById('cards').scrollIntoView()">Öyrənməyə başla ↓</button>
@@ -200,9 +172,10 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-num">02</span>
-      <div><h2>Flash-kartlar</h2><div class="sec-sub">Kartın üstünə klikləyib çevir. "Bilirəm" desən kart bir az seyrək çıxar, "Təkrar et" desən tezliklə yenə qarşına gələr. Kartın arxasından bütün zaman formalarına da keçə bilərsən.</div></div>
+      <div><h2>Flash-kartlar</h2><div class="sec-sub">Kartın üstünə klikləyib çevir. Feillərin arxasında "Bütün zamanlar" düyməsi, isim/sifət/zərflərin arxasında qrammatik qeyd var.</div></div>
     </div>
 
+    <div class="chips" id="posChips"></div>
     <div class="chips" id="catChips"></div>
 
     <div class="progress-row">
@@ -216,6 +189,7 @@
           <div class="face front">
             <div class="idx mono" id="cardIdx">01</div>
             <div class="cat-tag" id="cardCat">HƏRƏKƏT</div>
+            <span class="pos-tag" id="cardPos">FEİL</span>
             <div class="ru" id="cardRu">делать</div>
             <div class="translit mono" id="cardTranslit">dyelat'</div>
             <div class="hint">klikləyib çevir</div>
@@ -223,11 +197,13 @@
           <div class="face back">
             <div class="idx mono" id="cardIdxB">01</div>
             <div class="cat-tag" id="cardCatB">HƏRƏKƏT</div>
+            <span class="pos-tag" id="cardPosB">FEİL</span>
             <div class="az" id="cardAz">etmək</div>
             <div class="translit mono" id="cardTranslitB">dyelat'</div>
             <div class="example" id="cardExample">Я делаю домашнее задание.</div>
+            <div class="gram" id="cardGram"></div>
             <div class="hint">klikləyib geri çevir</div>
-            <button class="tense-link" id="toConjBtn">🕐 Bütün zamanlar →</button>
+            <button class="tense-link" id="toConjBtn" style="display:none;">🕐 Bütün zamanlar →</button>
           </div>
         </div>
       </div>
@@ -246,9 +222,10 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-num">03</span>
-      <div><h2>Bütün siyahı</h2><div class="sec-sub">Qızılı zolaqlı olanlar artıq "bildiyin" kartlardır. Sözə kliklə — flash-kart bölməsinə keçərsən; saat işarəsinə kliklə — birbaşa həmin sözün bütün zaman formalarına.</div></div>
+      <div><h2>Bütün siyahı</h2><div class="sec-sub">Qızılı zolaqlı olanlar artıq "bildiyin" kartlardır. Söz növünə görə də süzgəcdən keçirə bilərsən.</div></div>
     </div>
     <div class="search-row"><input type="text" id="searchBox" placeholder="Söz axtar (rusca və ya azərbaycanca)..."></div>
+    <div class="chips" id="posChips2"></div>
     <div class="chips" id="catChips2"></div>
     <div class="verb-grid" id="verbGrid"></div>
   </div>
@@ -265,6 +242,7 @@
         <span>SUAL <span id="quizN">1</span>/<span id="quizTotal">10</span></span>
         <span class="streak">⚡ SERİYA: <span id="quizStreak">0</span></span>
       </div>
+      <span class="quiz-pos" id="quizPos">FEİL</span>
       <div class="quiz-q" id="quizWord">говорить</div>
       <div class="quiz-opts" id="quizOpts"></div>
       <div class="quiz-footer">
@@ -279,7 +257,7 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-num">05</span>
-      <div><h2>Təsrif (bütün zamanlar)</h2><div class="sec-sub">Lüğətdəki HƏR feilin İndiki, Keçmiş və Gələcək zaman formasına bax. Aşağıdan feili seç, zaman tabını dəyiş.</div></div>
+      <div><h2>Təsrif (bütün zamanlar)</h2><div class="sec-sub">Lüğətdəki HƏR feilin İndiki, Keçmiş və Gələcək zaman formasına bax (isim/sifət/zərflər təsriflənmir, onların qrammatik qeydi kartın arxasındadır).</div></div>
     </div>
     <div class="conj-select-wrap"><select id="conjSelect"></select></div>
     <div class="chips" id="tenseChips" style="margin-bottom:24px;"></div>
@@ -290,12 +268,12 @@
 </section>
 
 <footer>
-  <div class="wrap">RUSCA FEİLLƏR · Şəxsi öyrənmə vasitəsi · İrəliləyiş localStorage-də saxlanılır</div>
+  <div class="wrap">RUSCA LÜĞƏT · Şəxsi öyrənmə vasitəsi · İrəliləyiş localStorage-də saxlanılır</div>
 </footer>
 
 <script>
-/* ===================== DATA ===================== */
-const VERBS = [
+/* ===================== VERBS (feillər) ===================== */
+const VERBS_RAW = [
   {ru:"быть", tr:"bıt'", az:"olmaq", cat:"hereket", ex:"Я хочу быть врачом."},
   {ru:"делать", tr:"dyelat'", az:"etmək", cat:"hereket", ex:"Я делаю домашнее задание."},
   {ru:"идти", tr:"idti", az:"getmək (piyada)", cat:"hereket", ex:"Я иду в школу пешком."},
@@ -372,17 +350,100 @@ const VERBS = [
   {ru:"отдыхать", tr:"atdıhat'", az:"istirahət etmək", cat:"fealiyyet", ex:"Я отдыхаю по выходным."},
   {ru:"строить", tr:"stroit'", az:"tikmək", cat:"fealiyyet", ex:"Они строят новый дом."},
   {ru:"учить", tr:"uçit'", az:"öyrətmək, əzbərləmək", cat:"fealiyyet", ex:"Я учу новые слова каждый день."},
+
+  {ru:"разворачивать", tr:"razvaraçivat'", az:"yerləşdirmək (deploy etmək)", cat:"devops", ex:"Мы разворачиваем приложение на сервере."},
+  {ru:"настраивать", tr:"nastraivat'", az:"konfiqurasiya etmək", cat:"devops", ex:"Я настраиваю сеть на новом сервере."},
+  {ru:"автоматизировать", tr:"avtamatizirovat'", az:"avtomatlaşdırmaq", cat:"devops", ex:"Мы автоматизируем процесс сборки."},
+  {ru:"масштабировать", tr:"masştabirovat'", az:"miqyaslandırmaq (scale etmək)", cat:"devops", ex:"Команда масштабирует кластер под нагрузку."},
+  {ru:"отслеживать", tr:"atslejivat'", az:"izləmək, monitorinq etmək", cat:"devops", ex:"Мы отслеживаем ошибки в реальном времени."},
+  {ru:"оптимизировать", tr:"aptimizirovat'", az:"optimallaşdırmaq", cat:"devops", ex:"Нужно оптимизировать запрос к базе данных."},
+  {ru:"исправлять", tr:"ispravlyat'", az:"düzəltmək (bug fix)", cat:"devops", ex:"Разработчик исправляет ошибку в коде."},
+  {ru:"тестировать", tr:"testirovat'", az:"test etmək", cat:"devops", ex:"Мы тестируем новую версию перед релизом."},
+  {ru:"интегрировать", tr:"integrirovat'", az:"inteqrasiya etmək", cat:"devops", ex:"Сервис интегрируют с системой мониторинга."},
+  {ru:"запускать", tr:"zapuskat'", az:"işə salmaq, başlatmaq", cat:"devops", ex:"Я запускаю контейнер в облаке."},
+  {ru:"останавливать", tr:"astanavlivat'", az:"dayandırmaq", cat:"devops", ex:"Мы останавливаем сервис на обслуживание."},
+  {ru:"перезапускать", tr:"perezapuskat'", az:"yenidən başlatmaq", cat:"devops", ex:"Сервер нужно перезапустить после обновления."},
+  {ru:"обновлять", tr:"abnavlyat'", az:"yeniləmək", cat:"devops", ex:"Мы регулярно обновляем зависимости."},
+  {ru:"откатывать", tr:"atkatıvat'", az:"geri qaytarmaq (rollback)", cat:"devops", ex:"При сбое мы откатываем изменения."},
+  {ru:"внедрять", tr:"vnedryat'", az:"tətbiq etmək, implementasiya etmək", cat:"devops", ex:"Компания внедряет новую систему контроля."},
+  {ru:"поддерживать", tr:"paddyerjivat'", az:"dəstəkləmək, saxlamaq (maintain)", cat:"devops", ex:"Команда поддерживает инфраструктуру 24/7."},
 ];
+const VERBS = VERBS_RAW.map(v => Object.assign({}, v, {pos:"feil"}));
+
+const NOUNS = [
+  {ru:"сервер", tr:"server", az:"server", cat:"devops", gender:"kişi", plural:"серверы", ex:"Сервер не отвечает на запросы."},
+  {ru:"контейнер", tr:"kantyeynyer", az:"konteyner", cat:"devops", gender:"kişi", plural:"контейнеры", ex:"Приложение работает внутри контейнера."},
+  {ru:"кластер", tr:"klastyer", az:"klaster", cat:"devops", gender:"kişi", plural:"кластеры", ex:"Кластер состоит из пяти узлов."},
+  {ru:"облако", tr:"oblaka", az:"bulud (cloud)", cat:"devops", gender:"orta", plural:"облака", ex:"Мы храним данные в облаке."},
+  {ru:"сеть", tr:"syet'", az:"şəbəkə", cat:"devops", gender:"qadın", plural:"сети", ex:"Сеть настроена правильно."},
+  {ru:"база данных", tr:"baza dannıh", az:"verilənlər bazası", cat:"devops", gender:"qadın", plural:"базы данных", ex:"База данных хранит информацию о пользователях."},
+  {ru:"код", tr:"kod", az:"kod", cat:"devops", gender:"kişi", plural:"коды", ex:"Этот код нужно переписать."},
+  {ru:"репозиторий", tr:"repazitoriy", az:"repozitoriya", cat:"devops", gender:"kişi", plural:"репозитории", ex:"Изменения отправлены в репозиторий."},
+  {ru:"ветка", tr:"vyetka", az:"budaq (branch)", cat:"devops", gender:"qadın", plural:"ветки", ex:"Создай новую ветку для фичи."},
+  {ru:"сборка", tr:"sborka", az:"build (yığma)", cat:"devops", gender:"qadın", plural:"сборки", ex:"Сборка завершилась с ошибкой."},
+  {ru:"развёртывание", tr:"razvyortıvaniye", az:"yerləşdirmə (deployment)", cat:"devops", gender:"orta", plural:"развёртывания", ex:"Развёртывание прошло без проблем."},
+  {ru:"конвейер", tr:"kanvyeyer", az:"pipeline (konveyer)", cat:"devops", gender:"kişi", plural:"конвейеры", ex:"CI/CD конвейер запускается автоматически."},
+  {ru:"журнал", tr:"jurnal", az:"jurnal, log", cat:"devops", gender:"kişi", plural:"журналы", ex:"Проверь журнал ошибок сервера."},
+  {ru:"ошибка", tr:"aşıbka", az:"xəta", cat:"devops", gender:"qadın", plural:"ошибки", ex:"В коде найдена критическая ошибка."},
+  {ru:"безопасность", tr:"bezapasnast'", az:"təhlükəsizlik", cat:"devops", gender:"qadın", plural:null, ex:"Безопасность системы — наш приоритет."},
+  {ru:"нагрузка", tr:"nagruzka", az:"yük (load)", cat:"devops", gender:"qadın", plural:"нагрузки", ex:"Сервер не выдержал высокую нагрузку."},
+  {ru:"доступность", tr:"dastupnast'", az:"əlçatanlıq (availability)", cat:"devops", gender:"qadın", plural:null, ex:"Доступность сервиса составляет 99.9%."},
+  {ru:"мониторинг", tr:"manitoring", az:"monitorinq", cat:"devops", gender:"kişi", plural:null, ex:"Мониторинг показывает рост нагрузки."},
+  {ru:"автоматизация", tr:"avtamatizatsiya", az:"avtomatlaşdırma", cat:"devops", gender:"qadın", plural:null, ex:"Автоматизация ускоряет процесс развёртывания."},
+  {ru:"инфраструктура", tr:"infrastruktura", az:"infrastruktur", cat:"devops", gender:"qadın", plural:null, ex:"Инфраструктура компании размещена в облаке."},
+  {ru:"версия", tr:"vyersiya", az:"versiya", cat:"devops", gender:"qadın", plural:"версии", ex:"Вышла новая версия приложения."},
+  {ru:"команда", tr:"kamanda", az:"komanda (team)", cat:"devops", gender:"qadın", plural:"команды", ex:"Наша команда отвечает за инфраструктуру."},
+  {ru:"среда", tr:"sryeda", az:"mühit (environment)", cat:"devops", gender:"qadın", plural:"среды", ex:"Сначала тестируем в тестовой среде."},
+  {ru:"доступ", tr:"dostup", az:"giriş (access)", cat:"devops", gender:"kişi", plural:null, ex:"У тебя есть доступ к серверу?"},
+  {ru:"пользователь", tr:"pol'zavatyel'", az:"istifadəçi", cat:"devops", gender:"kişi", plural:"пользователи", ex:"Новый пользователь добавлен в систему."},
+  {ru:"уязвимость", tr:"uyazvimast'", az:"zəiflik (vulnerability)", cat:"devops", gender:"qadın", plural:"уязвимости", ex:"Сканер нашёл уязвимость в системе."},
+].map(n => Object.assign({}, n, {pos:"isim"}));
+
+const ADJECTIVES = [
+  {ru:"надёжный", tr:"nadyojnıy", az:"etibarlı (reliable)", cat:"devops", forms:["надёжный","надёжная","надёжное"], ex:"Это очень надёжный сервер."},
+  {ru:"масштабируемый", tr:"masştabiruyemıy", az:"miqyaslana bilən (scalable)", cat:"devops", forms:["масштабируемый","масштабируемая","масштабируемое"], ex:"Нужна масштабируемая архитектура."},
+  {ru:"распределённый", tr:"raspredelyonnıy", az:"paylanmış (distributed)", cat:"devops", forms:["распределённый","распределённая","распределённое"], ex:"Это распределённая система."},
+  {ru:"доступный", tr:"dastupnıy", az:"əlçatan (available)", cat:"devops", forms:["доступный","доступная","доступное"], ex:"Сервис всегда доступный."},
+  {ru:"безопасный", tr:"bezapasnıy", az:"təhlükəsiz (secure)", cat:"devops", forms:["безопасный","безопасная","безопасное"], ex:"Нужен безопасный канал связи."},
+  {ru:"быстрый", tr:"bıstrıy", az:"sürətli (fast)", cat:"devops", forms:["быстрый","быстрая","быстрое"], ex:"У нас быстрый ответ сервера."},
+  {ru:"медленный", tr:"medlennıy", az:"yavaş (slow)", cat:"devops", forms:["медленный","медленная","медленное"], ex:"Этот запрос слишком медленный."},
+  {ru:"автоматический", tr:"avtamaticheskiy", az:"avtomatik", cat:"devops", forms:["автоматический","автоматическая","автоматическое"], ex:"Это автоматический процесс."},
+  {ru:"ручной", tr:"ruchnoy", az:"əl ilə (manual)", cat:"devops", forms:["ручной","ручная","ручное"], ex:"Нужен ручной запуск скрипта."},
+  {ru:"критический", tr:"kriticheskiy", az:"kritik", cat:"devops", forms:["критический","критическая","критическое"], ex:"Это критическая ошибка."},
+  {ru:"стабильный", tr:"stabil'nıy", az:"stabil (sabit)", cat:"devops", forms:["стабильный","стабильная","стабильное"], ex:"Сервис работает стабильно."},
+  {ru:"нестабильный", tr:"nestabil'nıy", az:"qeyri-sabit (unstable)", cat:"devops", forms:["нестабильный","нестабильная","нестабильное"], ex:"Соединение нестабильное."},
+  {ru:"эффективный", tr:"effektivnıy", az:"effektiv", cat:"devops", forms:["эффективный","эффективная","эффективное"], ex:"Это очень эффективное решение."},
+  {ru:"устаревший", tr:"ustarevshiy", az:"köhnəlmiş (legacy)", cat:"devops", forms:["устаревший","устаревшая","устаревшее"], ex:"Это устаревшая версия системы."},
+  {ru:"сложный", tr:"slojnıy", az:"mürəkkəb (complex)", cat:"devops", forms:["сложный","сложная","сложное"], ex:"У нас сложная архитектура."},
+].map(a => Object.assign({}, a, {pos:"sifet"}));
+
+const ADVERBS = [
+  {ru:"автоматически", tr:"avtamaticheski", az:"avtomatik olaraq", cat:"devops", ex:"Система обновляется автоматически."},
+  {ru:"быстро", tr:"bıstra", az:"sürətlə", cat:"devops", ex:"Сервер отвечает быстро."},
+  {ru:"медленно", tr:"medlenna", az:"yavaş-yavaş", cat:"devops", ex:"Приложение загружается медленно."},
+  {ru:"постоянно", tr:"pastayanna", az:"daim, davamlı olaraq", cat:"devops", ex:"Мы постоянно мониторим систему."},
+  {ru:"регулярно", tr:"regulyarna", az:"müntəzəm olaraq", cat:"devops", ex:"Делай резервные копии регулярно."},
+  {ru:"вручную", tr:"vruçnuyu", az:"əl ilə (manual olaraq)", cat:"devops", ex:"Иногда нужно запускать скрипт вручную."},
+  {ru:"эффективно", tr:"effektivna", az:"effektiv şəkildə", cat:"devops", ex:"Команда работает эффективно."},
+  {ru:"успешно", tr:"uspeshna", az:"uğurla", cat:"devops", ex:"Развёртывание прошло успешно."},
+  {ru:"неправильно", tr:"nepravil'na", az:"səhv olaraq", cat:"devops", ex:"Конфигурация настроена неправильно."},
+  {ru:"сразу", tr:"srazu", az:"dərhal", cat:"devops", ex:"Ошибка появилась сразу после деплоя."},
+  {ru:"удалённо", tr:"udalyonna", az:"məsafədən (remote)", cat:"devops", ex:"Мы работаем удалённо."},
+  {ru:"параллельно", tr:"parallel'na", az:"paralel olaraq", cat:"devops", ex:"Тесты запускаются параллельно."},
+].map(a => Object.assign({}, a, {pos:"zerf"}));
+
+const WORDS = VERBS.concat(NOUNS, ADJECTIVES, ADVERBS);
 
 const CATS = {
   hereket: "Əsas hərəkət",
   gundelik: "Gündəlik həyat",
   unsiyyet: "Ünsiyyət və duyğu",
   baslama: "Başlama / bitmə",
-  fealiyyet: "Fəaliyyət və hisslər"
+  fealiyyet: "Fəaliyyət və hisslər",
+  devops: "DevOps lüğəti"
 };
+const POS_LABELS = { feil:"Feil", isim:"İsim", sifet:"Sifət", zerf:"Zərf" };
 
-/* ===================== CONJUGATION DATA (hər feil üçün) ===================== */
 const CONJ = {
   "быть": { present:null, past:["был","была","было","были"], futureForms:["буду","будешь","будет","будем","будете","будут"],
     noteP:"Müasir rus dilində быть-in indiki zamanı demək olar işlədilmir (cümlədə buraxılır).",
@@ -433,7 +494,7 @@ const CONJ = {
   "читать": { present:["читаю","читаешь","читает","читаем","читаете","читают"], past:["читал","читала","читало","читали"],
     noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + читать." },
   "писать": { present:["пишу","пишешь","пишет","пишем","пишете","пишут"], past:["писал","писала","писало","писали"],
-    noteP:"с → ш dəyişir, yalnız indiki zamanda.", noteT:"Keçmişdə kök orijinal qalır: писал-.", noteF:"буду/будешь... + писать." },
+    noteP:"с → ш dəyişir, yalnız indiki zamanda.", noteT:"Keçmişdə kök orijинал qalır: писал-.", noteF:"буду/будешь... + писать." },
   "играть": { present:["играю","играешь","играет","играем","играете","играют"], past:["играл","играла","играло","играли"],
     noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + играть." },
   "жить": { present:["живу","живёшь","живёт","живём","живёте","живут"], past:["жил","жила","жило","жили"],
@@ -498,7 +559,6 @@ const CONJ = {
     noteP:"-авать qrupu, refleksiv.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + оставаться." },
   "становиться": { present:["становлюсь","становишься","становится","становимся","становитесь","становятся"], past:["становился","становилась","становилось","становились"],
     noteP:"в → вл dəyişir, yalnız я formasında.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + становиться." },
-
   "звонить": { present:["звоню","звонишь","звонит","звоним","звоните","звонят"], past:["звонил","звонила","звонило","звонили"],
     noteP:"Müntəzəm -ить qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + звонить." },
   "встречаться": { present:["встречаюсь","встречаешься","встречается","встречаемся","встречаетесь","встречаются"], past:["встречался","встречалась","встречалось","встречались"],
@@ -531,13 +591,45 @@ const CONJ = {
     noteP:"Müntəzəm -ить qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + строить." },
   "учить": { present:["учу","учишь","учит","учим","учите","учат"], past:["учил","учила","учило","учили"],
     noteP:"Müntəzəm -ить qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + учить." },
+
+  "разворачивать": { present:["разворачиваю","разворачиваешь","разворачивает","разворачиваем","разворачиваете","разворачивают"], past:["разворачивал","разворачивала","разворачивало","разворачивали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + разворачивать." },
+  "настраивать": { present:["настраиваю","настраиваешь","настраивает","настраиваем","настраиваете","настраивают"], past:["настраивал","настраивала","настраивало","настраивали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + настраивать." },
+  "автоматизировать": { present:["автоматизирую","автоматизируешь","автоматизирует","автоматизируем","автоматизируете","автоматизируют"], past:["автоматизировал","автоматизировала","автоматизировало","автоматизировали"],
+    noteP:"-ировать qrupu (xarici sözlərdən düzələn feillərin tipik qəlibi).", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + автоматизировать." },
+  "масштабировать": { present:["масштабирую","масштабируешь","масштабирует","масштабируем","масштабируете","масштабируют"], past:["масштабировал","масштабировала","масштабировало","масштабировали"],
+    noteP:"-ировать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + масштабировать." },
+  "отслеживать": { present:["отслеживаю","отслеживаешь","отслеживает","отслеживаем","отслеживаете","отслеживают"], past:["отслеживал","отслеживала","отслеживало","отслеживали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + отслеживать." },
+  "оптимизировать": { present:["оптимизирую","оптимизируешь","оптимизирует","оптимизируем","оптимизируете","оптимизируют"], past:["оптимизировал","оптимизировала","оптимизировало","оптимизировали"],
+    noteP:"-ировать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + оптимизировать." },
+  "исправлять": { present:["исправляю","исправляешь","исправляет","исправляем","исправляете","исправляют"], past:["исправлял","исправляла","исправляло","исправляли"],
+    noteP:"Müntəzəm -ять qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + исправлять." },
+  "тестировать": { present:["тестирую","тестируешь","тестирует","тестируем","тестируете","тестируют"], past:["тестировал","тестировала","тестировало","тестировали"],
+    noteP:"-ировать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + тестировать." },
+  "интегрировать": { present:["интегрирую","интегрируешь","интегрирует","интегрируем","интегрируете","интегрируют"], past:["интегрировал","интегрировала","интегрировало","интегрировали"],
+    noteP:"-ировать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + интегрировать." },
+  "запускать": { present:["запускаю","запускаешь","запускает","запускаем","запускаете","запускают"], past:["запускал","запускала","запускало","запускали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + запускать." },
+  "останавливать": { present:["останавливаю","останавливаешь","останавливает","останавливаем","останавливаете","останавливают"], past:["останавливал","останавливала","останавливало","останавливали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + останавливать." },
+  "перезапускать": { present:["перезапускаю","перезапускаешь","перезапускает","перезапускаем","перезапускаете","перезапускают"], past:["перезапускал","перезапускала","перезапускало","перезапускали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + перезапускать." },
+  "обновлять": { present:["обновляю","обновляешь","обновляет","обновляем","обновляете","обновляют"], past:["обновлял","обновляла","обновляло","обновляли"],
+    noteP:"Müntəzəm -ять qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + обновлять." },
+  "откатывать": { present:["откатываю","откатываешь","откатывает","откатываем","откатываете","откатывают"], past:["откатывал","откатывала","откатывало","откатывали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + откатывать." },
+  "внедрять": { present:["внедряю","внедряешь","внедряет","внедряем","внедряете","внедряют"], past:["внедрял","внедряла","внедряло","внедряли"],
+    noteP:"Müntəzəm -ять qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + внедрять." },
+  "поддерживать": { present:["поддерживаю","поддерживаешь","поддерживает","поддерживаем","поддерживаете","поддерживают"], past:["поддерживал","поддерживала","поддерживало","поддерживали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + поддерживать." },
 };
 
 const TENSE_LABELS = { present:"İndiki zaman", past:"Keçmiş zaman", future:"Gələcək zaman" };
 let activeTense = "present";
 
-/* ===================== STATE ===================== */
-const STORE_KEY = "rus_verb_progress_v2";
+const STORE_KEY = "rus_word_progress_v3";
 function loadProgress(){
   try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {learned:{}, again:{}, quizBest:0}; }
   catch(e){ return {learned:{}, again:{}, quizBest:0}; }
@@ -546,22 +638,27 @@ function saveProgress(){ localStorage.setItem(STORE_KEY, JSON.stringify(progress
 let progress = loadProgress();
 
 let activeCat = "all";
+let activePos = "all";
 let searchTerm = "";
 let deck = [];
 let cardPos = 0;
 let flipped = false;
 
-function verbId(v){ return v.ru; }
+function wordId(v){ return v.ru + "|" + v.pos; }
 
-function matchesSearch(v){
-  if(!searchTerm) return true;
-  const t = searchTerm.toLowerCase();
-  return v.ru.toLowerCase().includes(t) || v.az.toLowerCase().includes(t) || v.tr.toLowerCase().includes(t);
+function matchesFilter(v){
+  if(activeCat!=="all" && v.cat!==activeCat) return false;
+  if(activePos!=="all" && v.pos!==activePos) return false;
+  if(searchTerm){
+    const t = searchTerm.toLowerCase();
+    if(!(v.ru.toLowerCase().includes(t) || v.az.toLowerCase().includes(t) || v.tr.toLowerCase().includes(t))) return false;
+  }
+  return true;
 }
 
 function buildDeck(){
-  deck = VERBS.filter(v => (activeCat==="all" || v.cat===activeCat) && matchesSearch(v));
-  if(deck.length===0) deck = VERBS.slice();
+  deck = WORDS.filter(matchesFilter);
+  if(deck.length===0) deck = WORDS.slice();
   cardPos = 0;
   flipped = false;
   renderCard();
@@ -583,9 +680,40 @@ function renderChips(containerId, onSelect){
     el.appendChild(c);
   });
 }
+function renderPosChips(containerId, onSelect){
+  const el = document.getElementById(containerId);
+  el.innerHTML = "";
+  const allChip = document.createElement("button");
+  allChip.className = "chip pos-chip" + (activePos==="all" ? " active":"");
+  allChip.textContent = "Bütün növlər";
+  allChip.onclick = () => { activePos="all"; refreshAllChips(); onSelect(); };
+  el.appendChild(allChip);
+  Object.keys(POS_LABELS).forEach(key=>{
+    const c = document.createElement("button");
+    c.className = "chip pos-chip" + (activePos===key ? " active":"");
+    c.textContent = POS_LABELS[key];
+    c.onclick = () => { activePos=key; refreshAllChips(); onSelect(); };
+    el.appendChild(c);
+  });
+}
 function refreshAllChips(){
   renderChips("catChips", buildDeck);
+  renderPosChips("posChips", buildDeck);
   renderChips("catChips2", renderGrid);
+  renderPosChips("posChips2", renderGrid);
+}
+
+function gramLine(v){
+  if(v.pos==="isim"){
+    return "İsim · cins: " + v.gender + (v.plural ? " · cəm: " + v.plural : " · cəmi yoxdur");
+  }
+  if(v.pos==="sifet"){
+    return "Sifət · " + v.forms[0] + " (k.) / " + v.forms[1] + " (q.) / " + v.forms[2] + " (o.)";
+  }
+  if(v.pos==="zerf"){
+    return "Zərf — şəxs/zamana görə dəyişmir";
+  }
+  return "";
 }
 
 function renderCard(){
@@ -595,20 +723,29 @@ function renderCard(){
   document.getElementById("cardIdxB").textContent = idx;
   document.getElementById("cardCat").textContent = CATS[v.cat].toUpperCase();
   document.getElementById("cardCatB").textContent = CATS[v.cat].toUpperCase();
+  document.getElementById("cardPos").textContent = POS_LABELS[v.pos].toUpperCase();
+  document.getElementById("cardPosB").textContent = POS_LABELS[v.pos].toUpperCase();
   document.getElementById("cardRu").textContent = v.ru;
   document.getElementById("cardTranslit").textContent = v.tr;
   document.getElementById("cardTranslitB").textContent = v.tr;
   document.getElementById("cardAz").textContent = v.az;
   document.getElementById("cardExample").textContent = v.ex;
+  document.getElementById("cardGram").textContent = gramLine(v);
   document.getElementById("flashcard").classList.remove("flipped");
   flipped = false;
-  document.getElementById("toConjBtn").onclick = (e)=>{ e.stopPropagation(); gotoConjugation(v.ru); };
+  const toConjBtn = document.getElementById("toConjBtn");
+  if(v.pos==="feil"){
+    toConjBtn.style.display = "inline-block";
+    toConjBtn.onclick = (e)=>{ e.stopPropagation(); gotoConjugation(v.ru); };
+  } else {
+    toConjBtn.style.display = "none";
+  }
   updateProgressBar();
 }
 
 function updateProgressBar(){
   const total = deck.length;
-  const learnedInDeck = deck.filter(v => progress.learned[verbId(v)]).length;
+  const learnedInDeck = deck.filter(v => progress.learned[wordId(v)]).length;
   document.getElementById("progFill").style.width = total ? (learnedInDeck/total*100)+"%" : "0%";
   document.getElementById("progTxt").textContent = learnedInDeck + " / " + total + " öyrənilib";
   document.getElementById("statLearned").textContent = Object.keys(progress.learned).length;
@@ -622,8 +759,8 @@ document.getElementById("nextBtn").onclick = ()=>{ cardPos = (cardPos+1) % deck.
 document.getElementById("prevBtn").onclick = ()=>{ cardPos = (cardPos-1+deck.length) % deck.length; renderCard(); };
 document.getElementById("knowBtn").onclick = ()=>{
   const v = deck[cardPos];
-  progress.learned[verbId(v)] = true;
-  delete progress.again[verbId(v)];
+  progress.learned[wordId(v)] = true;
+  delete progress.again[wordId(v)];
   saveProgress();
   cardPos = (cardPos+1) % deck.length;
   renderCard();
@@ -631,22 +768,21 @@ document.getElementById("knowBtn").onclick = ()=>{
 };
 document.getElementById("againBtn").onclick = ()=>{
   const v = deck[cardPos];
-  progress.again[verbId(v)] = true;
-  delete progress.learned[verbId(v)];
+  progress.again[wordId(v)] = true;
+  delete progress.learned[wordId(v)];
   saveProgress();
   cardPos = (cardPos+1) % deck.length;
   renderCard();
   renderGrid();
 };
 
-/* ---------- BROWSE GRID ---------- */
 document.getElementById("searchBox").addEventListener("input", (e)=>{
   searchTerm = e.target.value;
   renderGrid();
 });
 
 function renderGrid(){
-  const list = VERBS.filter(v => (activeCat==="all" || v.cat===activeCat) && matchesSearch(v));
+  const list = WORDS.filter(matchesFilter);
   const grid = document.getElementById("verbGrid");
   grid.innerHTML = "";
   if(list.length===0){
@@ -655,23 +791,23 @@ function renderGrid(){
   }
   list.forEach(v=>{
     const cell = document.createElement("div");
-    cell.className = "verb-cell" + (progress.learned[verbId(v)] ? " learned":"");
-    cell.innerHTML = `<button class="clock-btn" title="Bütün zamanlar">🕐</button><div class="vru">${v.ru}</div><div class="vtr mono">${v.tr}</div><div class="vaz">${v.az}</div>`;
+    cell.className = "verb-cell" + (progress.learned[wordId(v)] ? " learned":"");
+    const clockHtml = v.pos==="feil" ? '<button class="clock-btn" title="Bütün zamanlar">🕐</button>' : "";
+    cell.innerHTML = `${clockHtml}<div class="vpos">${POS_LABELS[v.pos]}</div><div class="vru">${v.ru}</div><div class="vtr mono">${v.tr}</div><div class="vaz">${v.az}</div>`;
     cell.querySelector(".vru").onclick = ()=>{
-      activeCat = v.cat;
+      activeCat = v.cat; activePos = "all";
       refreshAllChips();
       buildDeck();
-      cardPos = deck.findIndex(d=>d.ru===v.ru);
+      cardPos = deck.findIndex(d=>d.ru===v.ru && d.pos===v.pos);
       if(cardPos<0) cardPos=0;
       renderCard();
       document.getElementById("cards").scrollIntoView({behavior:"smooth"});
     };
-    cell.querySelector(".clock-btn").onclick = ()=> gotoConjugation(v.ru);
+    if(v.pos==="feil") cell.querySelector(".clock-btn").onclick = ()=> gotoConjugation(v.ru);
     grid.appendChild(cell);
   });
 }
 
-/* ---------- NAV ---------- */
 document.querySelectorAll(".navlinks button").forEach(btn=>{
   btn.onclick = ()=>{
     document.querySelectorAll(".navlinks button").forEach(b=>b.classList.remove("active"));
@@ -680,7 +816,6 @@ document.querySelectorAll(".navlinks button").forEach(btn=>{
   };
 });
 
-/* ===================== QUIZ ===================== */
 let quizPool = [];
 let quizIdx = 0;
 let quizScore = 0;
@@ -697,7 +832,7 @@ function shuffle(arr){
 }
 
 function startQuiz(){
-  quizPool = shuffle(VERBS).slice(0, QUIZ_LEN);
+  quizPool = shuffle(WORDS).slice(0, QUIZ_LEN);
   quizIdx = 0; quizScore = 0; quizStreak = 0;
   document.getElementById("quizTotal").textContent = QUIZ_LEN;
   renderQuizQ();
@@ -706,6 +841,7 @@ function startQuiz(){
 function renderQuizQ(){
   document.getElementById("quizNextBtn").style.display = "none";
   if(quizIdx >= quizPool.length){
+    document.getElementById("quizPos").textContent = "";
     document.getElementById("quizWord").textContent = "Bitdi! 🎉";
     document.getElementById("quizOpts").innerHTML = `<div style="text-align:center;font-family:'PT Mono';font-size:13px;color:var(--muted);">Nəticə: ${quizScore} / ${quizPool.length}</div>`;
     const nb = document.getElementById("quizNextBtn");
@@ -717,11 +853,14 @@ function renderQuizQ(){
   }
   const v = quizPool[quizIdx];
   document.getElementById("quizN").textContent = quizIdx+1;
+  document.getElementById("quizPos").textContent = POS_LABELS[v.pos].toUpperCase();
   document.getElementById("quizWord").textContent = v.ru;
   document.getElementById("quizScore").textContent = "XAL: " + quizScore;
   document.getElementById("quizStreak").textContent = quizStreak;
 
-  const wrongPool = shuffle(VERBS.filter(x=>x.ru!==v.ru)).slice(0,3).map(x=>x.az);
+  let samePos = WORDS.filter(x=> x.ru!==v.ru && x.pos===v.pos);
+  if(samePos.length<3) samePos = WORDS.filter(x=>x.ru!==v.ru);
+  const wrongPool = shuffle(samePos).slice(0,3).map(x=>x.az);
   const options = shuffle([v.az, ...wrongPool]);
   const optsEl = document.getElementById("quizOpts");
   optsEl.innerHTML = "";
@@ -753,7 +892,6 @@ function handleQuizAnswer(btn, chosen, correct, optsEl){
   document.getElementById("quizNextBtn").style.display = "inline-block";
 }
 
-/* ===================== CONJUGATION ===================== */
 function renderConjSelect(){
   const sel = document.getElementById("conjSelect");
   sel.innerHTML = "";
@@ -828,9 +966,9 @@ function renderConj(verb){
   }
 }
 
-/* ===================== BOOT ===================== */
-document.getElementById("statTotal").textContent = VERBS.length;
-document.getElementById("statCat").textContent = Object.keys(CATS).length;
+document.getElementById("statTotal").textContent = WORDS.length;
+document.getElementById("statVerb").textContent = VERBS.length;
+document.getElementById("statDevops").textContent = WORDS.filter(w=>w.cat==="devops").length;
 refreshAllChips();
 buildDeck();
 renderGrid();
