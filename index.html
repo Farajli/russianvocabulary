@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ГЛАГОЛЫ — Rusca Feillər</title>
+<meta name="description" content="Rus dili feillərini öyrənmək üçün interaktiv kart, viktorina və təsriflənmə vasitəsi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=PT+Sans:wght@400;700&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141311;
+    --cream:#EFE7D6;
+    --red:#D2351F;
+    --gold:#D9A441;
+    --muted:#9C9384;
+    --line: rgba(239,231,214,0.16);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'PT Sans', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.display{
+    font-family:'Unbounded', sans-serif;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+  .mono{font-family:'PT Mono', monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  nav{ position:sticky; top:0; z-index:50; background:var(--ink); border-bottom:1px solid var(--line); }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:60px; }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Unbounded'; font-weight:800; font-size:15px; letter-spacing:0.04em;}
+  .brand .dot{width:10px;height:10px;background:var(--red);}
+  .navlinks{display:flex; gap:4px;}
+  .navlinks button{
+    background:none; border:none; color:var(--cream); opacity:0.6;
+    font-family:'PT Sans'; font-weight:700; font-size:13px;
+    text-transform:uppercase; letter-spacing:0.06em;
+    padding:10px 14px; cursor:pointer; transition:opacity .15s;
+  }
+  .navlinks button:hover, .navlinks button.active{opacity:1; color:var(--gold);}
+
+  header.hero{ position:relative; overflow:hidden; border-bottom:1px solid var(--line); padding:90px 0 70px; }
+  header.hero::before{ content:""; position:absolute; top:-40%; right:-12%; width:560px; height:560px; background:var(--red); transform:rotate(28deg); z-index:0; }
+  header.hero::after{ content:""; position:absolute; bottom:-50%; right:8%; width:300px; height:300px; background:var(--gold); transform:rotate(28deg); z-index:0; opacity:0.9; }
+  .hero-inner{position:relative; z-index:2;}
+  .eyebrow{ font-family:'PT Mono'; font-size:13px; letter-spacing:0.18em; color:var(--gold); text-transform:uppercase; margin-bottom:18px; }
+  .hero h1{ font-size:clamp(42px, 8vw, 92px); line-height:0.92; color:var(--cream); }
+  .hero h1 span{color:var(--ink); -webkit-text-stroke: 2px var(--cream);}
+  .hero p.lead{ max-width:520px; margin-top:24px; font-size:17px; color:var(--cream); opacity:0.85; }
+  .hero-stats{display:flex; gap:36px; margin-top:40px; flex-wrap:wrap;}
+  .hero-stats div{border-left:2px solid var(--red); padding-left:12px;}
+  .hero-stats .num{font-family:'Unbounded'; font-weight:900; font-size:30px; display:block;}
+  .hero-stats .lbl{font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted);}
+  .cta{ display:inline-block; margin-top:38px; background:var(--cream); color:var(--ink); font-family:'Unbounded'; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.06em; padding:16px 30px; border:none; cursor:pointer; transition:transform .15s, background .15s; }
+  .cta:hover{background:var(--gold); transform:translateY(-2px);}
+
+  section{padding:64px 0; border-bottom:1px solid var(--line);}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:36px; flex-wrap:wrap;}
+  .sec-num{font-family:'PT Mono'; color:var(--red); font-size:14px;}
+  .sec-head h2{font-size:clamp(26px,4vw,40px);}
+  .sec-sub{color:var(--muted); font-size:14px; max-width:520px; margin-top:8px;}
+
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px;}
+  .chip{ border:1px solid var(--line); background:transparent; color:var(--cream); font-family:'PT Sans'; font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em; padding:8px 14px; cursor:pointer; transition:.15s; }
+  .chip.active{background:var(--red); border-color:var(--red); color:var(--cream);}
+
+  .progress-row{display:flex; align-items:center; gap:14px; margin-bottom:28px;}
+  .progress-bar{flex:1; height:6px; background:var(--line); position:relative; overflow:hidden;}
+  .progress-bar i{position:absolute; left:0; top:0; bottom:0; background:var(--gold); width:0%; transition:width .3s;}
+  .progress-txt{font-family:'PT Mono'; font-size:12px; color:var(--muted); white-space:nowrap;}
+
+  .card-stage{display:flex; flex-direction:column; align-items:center; gap:22px;}
+  .flip-zone{width:100%; max-width:480px; perspective:1400px;}
+  .flashcard{ position:relative; width:100%; height:320px; transform-style:preserve-3d; transition:transform .5s cubic-bezier(.4,.2,.2,1); cursor:pointer; }
+  .flashcard.flipped{transform:rotateY(180deg);}
+  .face{ position:absolute; inset:0; backface-visibility:hidden; border:1px solid var(--line); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:26px; }
+  .face.front{background:var(--ink);}
+  .face.back{background:var(--cream); color:var(--ink); transform:rotateY(180deg);}
+  .face .idx{position:absolute; top:14px; left:16px; font-family:'PT Mono'; font-size:12px; opacity:0.5;}
+  .face .cat-tag{position:absolute; top:14px; right:16px; font-family:'PT Mono'; font-size:11px; color:var(--red); text-transform:uppercase;}
+  .face .ru{font-family:'Unbounded'; font-weight:800; font-size:36px;}
+  .face .translit{font-family:'PT Mono'; font-size:13px; color:var(--gold); margin-top:10px;}
+  .face.back .translit{color:var(--red);}
+  .face .az{font-family:'Unbounded'; font-weight:700; font-size:23px;}
+  .face .example{font-size:13px; margin-top:12px; opacity:0.8; font-style:italic;}
+  .face .hint{position:absolute; bottom:46px; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; opacity:0.45; font-family:'PT Mono';}
+  .tense-link{
+    position:absolute; bottom:14px; background:var(--ink); color:var(--cream);
+    border:none; font-family:'PT Sans'; font-weight:700; font-size:11.5px;
+    text-transform:uppercase; letter-spacing:0.04em; padding:8px 14px; cursor:pointer;
+  }
+  .tense-link:hover{background:var(--red);}
+
+  .card-controls{display:flex; gap:10px; align-items:center;}
+  .ctrl-btn{ border:1px solid var(--line); background:transparent; color:var(--cream); width:46px; height:46px; font-size:18px; cursor:pointer; transition:.15s; }
+  .ctrl-btn:hover{border-color:var(--gold);}
+  .know-btn{ border:1px solid var(--gold); background:transparent; color:var(--gold); font-family:'PT Sans'; font-weight:700; font-size:13px; text-transform:uppercase; padding:13px 22px; cursor:pointer; transition:.15s; letter-spacing:0.04em; }
+  .know-btn:hover{background:var(--gold); color:var(--ink);}
+  .know-btn.again{border-color:var(--red); color:var(--red);}
+  .know-btn.again:hover{background:var(--red); color:var(--cream);}
+
+  .search-row{margin-bottom:20px;}
+  .search-row input{
+    width:100%; max-width:360px; background:transparent; border:1px solid var(--line); color:var(--cream);
+    font-family:'PT Sans'; font-size:14px; padding:11px 14px; outline:none;
+  }
+  .search-row input:focus{border-color:var(--gold);}
+  .search-row input::placeholder{color:var(--muted);}
+
+  .verb-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1px; background:var(--line);}
+  .verb-cell{background:var(--ink); padding:16px 18px; position:relative;}
+  .verb-cell:hover{background:rgba(217,164,65,0.08);}
+  .verb-cell .vru{font-family:'Unbounded'; font-weight:700; font-size:16px; cursor:pointer;}
+  .verb-cell .vtr{font-family:'PT Mono'; font-size:11.5px; color:var(--gold); margin:4px 0;}
+  .verb-cell .vaz{font-size:13px; color:var(--muted);}
+  .verb-cell.learned{box-shadow:inset 3px 0 0 var(--gold);}
+  .clock-btn{
+    position:absolute; top:14px; right:14px; background:none; border:1px solid var(--line);
+    color:var(--muted); width:26px; height:26px; font-size:12px; cursor:pointer;
+  }
+  .clock-btn:hover{border-color:var(--gold); color:var(--gold);}
+
+  .quiz-card{ border:1px solid var(--line); padding:34px; max-width:560px; margin:0 auto; }
+  .quiz-meta{display:flex; justify-content:space-between; font-family:'PT Mono'; font-size:12px; color:var(--muted); margin-bottom:18px;}
+  .quiz-q{font-family:'Unbounded'; font-size:30px; font-weight:800; text-align:center; margin:18px 0 30px;}
+  .quiz-opts{display:grid; gap:10px;}
+  .quiz-opt{ border:1px solid var(--line); background:transparent; color:var(--cream); text-align:left; padding:14px 16px; font-family:'PT Sans'; font-size:15px; font-weight:700; cursor:pointer; transition:.15s; display:flex; align-items:center; gap:12px; }
+  .quiz-opt span.k{font-family:'PT Mono'; color:var(--red); font-size:13px;}
+  .quiz-opt:hover{border-color:var(--gold);}
+  .quiz-opt.correct{border-color:var(--gold); background:rgba(217,164,65,0.15);}
+  .quiz-opt.wrong{border-color:var(--red); background:rgba(210,53,31,0.15);}
+  .quiz-footer{display:flex; justify-content:space-between; align-items:center; margin-top:22px;}
+  .streak{font-family:'PT Mono'; font-size:13px; color:var(--gold);}
+
+  .conj-select-wrap{margin-bottom:18px;}
+  select#conjSelect{
+    width:100%; max-width:360px; background:var(--ink); border:1px solid var(--line); color:var(--cream);
+    font-family:'PT Sans'; font-weight:700; font-size:15px; padding:12px 14px; outline:none; cursor:pointer;
+  }
+  select#conjSelect:focus{border-color:var(--gold);}
+  .conj-table{width:100%; border-collapse:collapse; max-width:560px;}
+  .conj-table td, .conj-table th{ border-bottom:1px solid var(--line); padding:13px 4px; font-size:15px; }
+  .conj-table th{text-align:left; color:var(--muted); font-family:'PT Mono'; font-size:12px; text-transform:uppercase; font-weight:400;}
+  .conj-table td.pron{font-family:'PT Mono'; color:var(--gold); width:120px;}
+  .conj-table td.form{font-family:'Unbounded'; font-weight:700; font-size:18px;}
+  .conj-note{margin-top:18px; font-size:13px; color:var(--muted); max-width:540px;}
+  .conj-empty{font-size:14px; color:var(--muted); max-width:540px; border-left:2px solid var(--red); padding-left:14px; margin:10px 0;}
+
+  footer{padding:40px 0; text-align:center;}
+  footer .wrap{font-family:'PT Mono'; font-size:12px; color:var(--muted);}
+
+  @media (max-width:640px){
+    .hero-stats{gap:22px;}
+    .flashcard{height:340px;}
+    .face .ru{font-size:28px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>ГЛАГОЛЫ · RUSCA FEİLLƏR</div>
+    <div class="navlinks">
+      <button data-go="cards" class="active">Kartlar</button>
+      <button data-go="browse">Bütün siyahı</button>
+      <button data-go="quiz">Viktorina</button>
+      <button data-go="conj">Təsrif</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">01 · ÖYRƏNMƏ ALƏTİ</div>
+    <h1>ГЛАГОЛЫ<br><span>FEİLLƏR</span></h1>
+    <p class="lead">Ən çox işlənən rus feillərini kart çevirərək, viktorina ilə yoxlayaraq və hər sözün İndiki / Keçmiş / Gələcək zaman formasına baxaraq əzbərlə. Hər şey brauzerində yadda saxlanılır.</p>
+    <div class="hero-stats">
+      <div><span class="num" id="statTotal">0</span><span class="lbl">Feil</span></div>
+      <div><span class="num" id="statCat">0</span><span class="lbl">Kateqoriya</span></div>
+      <div><span class="num" id="statLearned">0</span><span class="lbl">Öyrənilib</span></div>
+    </div>
+    <button class="cta" onclick="document.getElementById('cards').scrollIntoView()">Öyrənməyə başla ↓</button>
+  </div>
+</header>
+
+<section id="cards">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <div><h2>Flash-kartlar</h2><div class="sec-sub">Kartın üstünə klikləyib çevir. "Bilirəm" desən kart bir az seyrək çıxar, "Təkrar et" desən tezliklə yenə qarşına gələr. Kartın arxasından bütün zaman formalarına da keçə bilərsən.</div></div>
+    </div>
+
+    <div class="chips" id="catChips"></div>
+
+    <div class="progress-row">
+      <div class="progress-bar"><i id="progFill"></i></div>
+      <div class="progress-txt mono" id="progTxt">0 / 0</div>
+    </div>
+
+    <div class="card-stage">
+      <div class="flip-zone">
+        <div class="flashcard" id="flashcard">
+          <div class="face front">
+            <div class="idx mono" id="cardIdx">01</div>
+            <div class="cat-tag" id="cardCat">HƏRƏKƏT</div>
+            <div class="ru" id="cardRu">делать</div>
+            <div class="translit mono" id="cardTranslit">dyelat'</div>
+            <div class="hint">klikləyib çevir</div>
+          </div>
+          <div class="face back">
+            <div class="idx mono" id="cardIdxB">01</div>
+            <div class="cat-tag" id="cardCatB">HƏRƏKƏT</div>
+            <div class="az" id="cardAz">etmək</div>
+            <div class="translit mono" id="cardTranslitB">dyelat'</div>
+            <div class="example" id="cardExample">Я делаю домашнее задание.</div>
+            <div class="hint">klikləyib geri çevir</div>
+            <button class="tense-link" id="toConjBtn">🕐 Bütün zamanlar →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-controls">
+        <button class="ctrl-btn" id="prevBtn">←</button>
+        <button class="know-btn again" id="againBtn">↻ Təkrar et</button>
+        <button class="know-btn" id="knowBtn">✓ Bilirəm</button>
+        <button class="ctrl-btn" id="nextBtn">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="browse">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <div><h2>Bütün siyahı</h2><div class="sec-sub">Qızılı zolaqlı olanlar artıq "bildiyin" kartlardır. Sözə kliklə — flash-kart bölməsinə keçərsən; saat işarəsinə kliklə — birbaşa həmin sözün bütün zaman formalarına.</div></div>
+    </div>
+    <div class="search-row"><input type="text" id="searchBox" placeholder="Söz axtar (rusca və ya azərbaycanca)..."></div>
+    <div class="chips" id="catChips2"></div>
+    <div class="verb-grid" id="verbGrid"></div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <div><h2>Viktorina</h2><div class="sec-sub">Rusca söz üçün düzgün Azərbaycanca mənanı seç. Dörd variantdan biri düzdür.</div></div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-meta">
+        <span>SUAL <span id="quizN">1</span>/<span id="quizTotal">10</span></span>
+        <span class="streak">⚡ SERİYA: <span id="quizStreak">0</span></span>
+      </div>
+      <div class="quiz-q" id="quizWord">говорить</div>
+      <div class="quiz-opts" id="quizOpts"></div>
+      <div class="quiz-footer">
+        <span class="mono" id="quizScore" style="font-size:12px;color:var(--muted);">XAL: 0</span>
+        <button class="know-btn" id="quizNextBtn" style="display:none;">Növbəti →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="conj">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <div><h2>Təsrif (bütün zamanlar)</h2><div class="sec-sub">Lüğətdəki HƏR feilin İndiki, Keçmiş və Gələcək zaman formasına bax. Aşağıdan feili seç, zaman tabını dəyiş.</div></div>
+    </div>
+    <div class="conj-select-wrap"><select id="conjSelect"></select></div>
+    <div class="chips" id="tenseChips" style="margin-bottom:24px;"></div>
+    <table class="conj-table" id="conjTable"></table>
+    <div class="conj-empty" id="conjEmpty" style="display:none;"></div>
+    <div class="conj-note" id="conjNote"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">RUSCA FEİLLƏR · Şəxsi öyrənmə vasitəsi · İrəliləyiş localStorage-də saxlanılır</div>
+</footer>
+
+<script>
+/* ===================== DATA ===================== */
+const VERBS = [
+  {ru:"быть", tr:"bıt'", az:"olmaq", cat:"hereket", ex:"Я хочу быть врачом."},
+  {ru:"делать", tr:"dyelat'", az:"etmək", cat:"hereket", ex:"Я делаю домашнее задание."},
+  {ru:"идти", tr:"idti", az:"getmək (piyada)", cat:"hereket", ex:"Я иду в школу пешком."},
+  {ru:"ехать", tr:"yehat'", az:"getmək (nəqliyyatla)", cat:"hereket", ex:"Мы едем на машине в город."},
+  {ru:"говорить", tr:"gavarit'", az:"danışmaq", cat:"hereket", ex:"Она говорит по-русски."},
+  {ru:"сказать", tr:"skazat'", az:"demək", cat:"hereket", ex:"Он хочет сказать правду."},
+  {ru:"знать", tr:"znat'", az:"bilmək", cat:"hereket", ex:"Я знаю этот город."},
+  {ru:"думать", tr:"dumat'", az:"düşünmək", cat:"hereket", ex:"Я думаю о тебе."},
+  {ru:"видеть", tr:"videt'", az:"görmək", cat:"hereket", ex:"Я вижу море отсюда."},
+  {ru:"смотреть", tr:"smatryet'", az:"baxmaq", cat:"hereket", ex:"Дети смотрят фильм."},
+  {ru:"слышать", tr:"slışat'", az:"eşitmək", cat:"hereket", ex:"Я слышу музыку."},
+  {ru:"слушать", tr:"sluşat'", az:"qulaq asmaq", cat:"hereket", ex:"Он слушает радио утром."},
+  {ru:"понимать", tr:"panimat'", az:"başa düşmək", cat:"hereket", ex:"Ты понимаешь меня?"},
+  {ru:"хотеть", tr:"hatyet'", az:"istəmək", cat:"hereket", ex:"Я хочу чай, пожалуйста."},
+  {ru:"мочь", tr:"moç", az:"bacarmaq", cat:"hereket", ex:"Я могу помочь тебе."},
+  {ru:"любить", tr:"lyubit'", az:"sevmək", cat:"hereket", ex:"Я люблю это место."},
+
+  {ru:"есть", tr:"yest'", az:"yemək", cat:"gundelik", ex:"Мы едим суп на обед."},
+  {ru:"пить", tr:"pit'", az:"içmək", cat:"gundelik", ex:"Я пью кофе утром."},
+  {ru:"спать", tr:"spat'", az:"yatmaq", cat:"gundelik", ex:"Кошка спит весь день."},
+  {ru:"вставать", tr:"vstavat'", az:"qalxmaq (yuxudan)", cat:"gundelik", ex:"Я встаю в семь часов."},
+  {ru:"работать", tr:"rabotat'", az:"işləmək", cat:"gundelik", ex:"Она работает в банке."},
+  {ru:"учиться", tr:"uçitsa", az:"oxumaq (təhsil)", cat:"gundelik", ex:"Он учится в университете."},
+  {ru:"читать", tr:"çitat'", az:"oxumaq (kitab)", cat:"gundelik", ex:"Я читаю книгу вечером."},
+  {ru:"писать", tr:"pisat'", az:"yazmaq", cat:"gundelik", ex:"Она пишет письмо другу."},
+  {ru:"играть", tr:"igrat'", az:"oynamaq", cat:"gundelik", ex:"Дети играют во дворе."},
+  {ru:"жить", tr:"jıt'", az:"yaşamaq", cat:"gundelik", ex:"Я живу в Баку."},
+  {ru:"покупать", tr:"pakupat'", az:"almaq", cat:"gundelik", ex:"Мы покупаем хлеб в магазине."},
+  {ru:"продавать", tr:"pradavat'", az:"satmaq", cat:"gundelik", ex:"Он продаёт фрукты на рынке."},
+  {ru:"платить", tr:"platit'", az:"ödəmək", cat:"gundelik", ex:"Я плачу за такси картой."},
+  {ru:"готовить", tr:"gatovit'", az:"bişirmək", cat:"gundelik", ex:"Мама готовит ужин."},
+  {ru:"мыться", tr:"mıtsya", az:"yuyunmaq", cat:"gundelik", ex:"Я моюсь утром и вечером."},
+  {ru:"одеваться", tr:"adevatsa", az:"geyinmək", cat:"gundelik", ex:"Ребёнок одевается сам."},
+
+  {ru:"спрашивать", tr:"spraşivat'", az:"soruşmaq", cat:"unsiyyet", ex:"Я хочу спросить тебя кое-что."},
+  {ru:"отвечать", tr:"atveçat'", az:"cavab vermək", cat:"unsiyyet", ex:"Он быстро отвечает на письма."},
+  {ru:"просить", tr:"prasit'", az:"xahiş etmək", cat:"unsiyyet", ex:"Я прошу прощения."},
+  {ru:"помогать", tr:"pamagat'", az:"kömək etmək", cat:"unsiyyet", ex:"Она помогает мне с работой."},
+  {ru:"ждать", tr:"jdat'", az:"gözləmək", cat:"unsiyyet", ex:"Мы ждём автобус."},
+  {ru:"искать", tr:"iskat'", az:"axtarmaq", cat:"unsiyyet", ex:"Я ищу свои ключи."},
+  {ru:"находить", tr:"nahadit'", az:"tapmaq", cat:"unsiyyet", ex:"Он всегда находит выход."},
+  {ru:"терять", tr:"teryat'", az:"itirmək", cat:"unsiyyet", ex:"Я не хочу терять время."},
+  {ru:"радоваться", tr:"radavatsa", az:"sevinmək", cat:"unsiyyet", ex:"Дети радуются снегу."},
+  {ru:"бояться", tr:"bayatsa", az:"qorxmaq", cat:"unsiyyet", ex:"Я не боюсь темноты."},
+  {ru:"плакать", tr:"plakat'", az:"ağlamaq", cat:"unsiyyet", ex:"Малыш плачет ночью."},
+  {ru:"смеяться", tr:"smeyatsa", az:"gülmək", cat:"unsiyyet", ex:"Мы смеёмся над шуткой."},
+  {ru:"нравиться", tr:"nravitsa", az:"xoşuna gəlmək", cat:"unsiyyet", ex:"Мне нравится этот город."},
+
+  {ru:"начинать", tr:"naçinat'", az:"başlamaq", cat:"baslama", ex:"Урок начинается в девять."},
+  {ru:"заканчивать", tr:"zakançivat'", az:"bitirmək", cat:"baslama", ex:"Я заканчиваю работу в пять."},
+  {ru:"продолжать", tr:"pradaljat'", az:"davam etmək", cat:"baslama", ex:"Продолжай, я слушаю."},
+  {ru:"открывать", tr:"atkrıvat'", az:"açmaq", cat:"baslama", ex:"Он открывает окно."},
+  {ru:"закрывать", tr:"zakrıvat'", az:"bağlamaq", cat:"baslama", ex:"Закрой дверь, пожалуйста."},
+  {ru:"давать", tr:"davat'", az:"vermək", cat:"baslama", ex:"Я даю тебе свой номер."},
+  {ru:"брать", tr:"brat'", az:"götürmək", cat:"baslama", ex:"Возьми зонт, идёт дождь."},
+  {ru:"приходить", tr:"prihadit'", az:"gəlmək", cat:"baslama", ex:"Гости приходят в семь."},
+  {ru:"уходить", tr:"uhadit'", az:"getmək (ayrılmaq)", cat:"baslama", ex:"Он уходит рано утром."},
+  {ru:"оставаться", tr:"astavatsa", az:"qalmaq", cat:"baslama", ex:"Я остаюсь дома сегодня."},
+  {ru:"становиться", tr:"stanavitsa", az:"olmaq, çevrilmək", cat:"baslama", ex:"Погода становится холодной."},
+
+  {ru:"звонить", tr:"zvanit'", az:"zəng etmək", cat:"fealiyyet", ex:"Я звоню маме каждый день."},
+  {ru:"встречаться", tr:"vstreçatsa", az:"görüşmək", cat:"fealiyyet", ex:"Мы встречаемся в парке."},
+  {ru:"узнавать", tr:"uznavat'", az:"öyrənmək, tanımaq", cat:"fealiyyet", ex:"Я узнаю новости утром."},
+  {ru:"забывать", tr:"zabıvat'", az:"unutmaq", cat:"fealiyyet", ex:"Я часто забываю зонт дома."},
+  {ru:"вспоминать", tr:"vspaminat'", az:"xatırlamaq", cat:"fealiyyet", ex:"Я вспоминаю детство с улыбкой."},
+  {ru:"чувствовать", tr:"çuvstvavat'", az:"hiss etmək", cat:"fealiyyet", ex:"Я чувствую себя хорошо."},
+  {ru:"верить", tr:"verit'", az:"inanmaq", cat:"fealiyyet", ex:"Я верю тебе полностью."},
+  {ru:"надеяться", tr:"nadyeyatsa", az:"ümid etmək", cat:"fealiyyet", ex:"Я надеюсь на лучшее."},
+  {ru:"петь", tr:"pyet'", az:"oxumaq (mahnı)", cat:"fealiyyet", ex:"Она поёт очень красиво."},
+  {ru:"танцевать", tr:"tantsevat'", az:"rəqs etmək", cat:"fealiyyet", ex:"Мы танцуем на свадьбе."},
+  {ru:"рисовать", tr:"risavat'", az:"rəsm çəkmək", cat:"fealiyyet", ex:"Ребёнок рисует солнце."},
+  {ru:"путешествовать", tr:"puteşestvavat'", az:"səyahət etmək", cat:"fealiyyet", ex:"Мы путешествуем летом."},
+  {ru:"гулять", tr:"gulyat'", az:"gəzmək", cat:"fealiyyet", ex:"Дети гуляют во дворе."},
+  {ru:"отдыхать", tr:"atdıhat'", az:"istirahət etmək", cat:"fealiyyet", ex:"Я отдыхаю по выходным."},
+  {ru:"строить", tr:"stroit'", az:"tikmək", cat:"fealiyyet", ex:"Они строят новый дом."},
+  {ru:"учить", tr:"uçit'", az:"öyrətmək, əzbərləmək", cat:"fealiyyet", ex:"Я учу новые слова каждый день."},
+];
+
+const CATS = {
+  hereket: "Əsas hərəkət",
+  gundelik: "Gündəlik həyat",
+  unsiyyet: "Ünsiyyət və duyğu",
+  baslama: "Başlama / bitmə",
+  fealiyyet: "Fəaliyyət və hisslər"
+};
+
+/* ===================== CONJUGATION DATA (hər feil üçün) ===================== */
+const CONJ = {
+  "быть": { present:null, past:["был","была","было","были"], futureForms:["буду","будешь","будет","будем","будете","будут"],
+    noteP:"Müasir rus dilində быть-in indiki zamanı demək olar işlədilmir (cümlədə buraxılır).",
+    noteT:"Keçmiş zaman standart qəlibdədir.", noteF:"Бу feildə буду həm köməkçi, həm də öz gələcək forması — sözdən sonra başqa söz əlavə edilmir." },
+  "делать": { present:["делаю","делаешь","делает","делаем","делаете","делают"], past:["делал","делала","делало","делали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + делать." },
+  "идти": { present:["иду","идёшь","идёт","идём","идёте","идут"], past:["шёл","шла","шло","шли"],
+    noteP:"Kök dəyişir (ид-), vurğu sonluğa düşür.", noteT:"Tam qeyri-müntəzəm — kök tamam dəyişir (шёл/шла).", noteF:"буду/будешь... + идти." },
+  "ехать": { present:["еду","едешь","едет","едем","едете","едут"], past:["ехал","ехала","ехало","ехали"],
+    noteP:"Qeyri-müntəzəm kök: ехать → ед-.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + ехать." },
+  "говорить": { present:["говорю","говоришь","говорит","говорим","говорите","говорят"], past:["говорил","говорила","говорило","говорили"],
+    noteP:"Müntəzəm -ить qrupu.", noteT:"-ть düşür, cins/say sonluğu əlavə olunur.", noteF:"буду/будешь... + говорить." },
+  "сказать": { present:null, past:["сказал","сказала","сказало","сказали"], futureForms:["скажу","скажешь","скажет","скажем","скажете","скажут"],
+    noteP:"Bu feil perfektivdir (говорить-in cüt forması) — ayrıca indiki zamanı yoxdur.",
+    noteT:"Standart keçmiş zaman qəlibi.", noteF:"Perfektiv feillərdə gələcək zaman düz təsriflə qurulur, буду lazım deyil." },
+  "знать": { present:["знаю","знаешь","знает","знаем","знаете","знают"], past:["знал","знала","знало","знали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + знать." },
+  "думать": { present:["думаю","думаешь","думает","думаем","думаете","думают"], past:["думал","думала","думало","думали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + думать." },
+  "видеть": { present:["вижу","видишь","видит","видим","видите","видят"], past:["видел","видела","видело","видели"],
+    noteP:"д → ж dəyişir, yalnız я formasında.", noteT:"Keçmişdə д qayıdır: видел-.", noteF:"буду/будешь... + видеть." },
+  "смотреть": { present:["смотрю","смотришь","смотрит","смотрим","смотрите","смотрят"], past:["смотрел","смотрела","смотрело","смотрели"],
+    noteP:"-еть ilə bitsə də 2-ci təsrif qrupuna aiddir (istisna).", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + смотреть." },
+  "слышать": { present:["слышу","слышишь","слышит","слышим","слышите","слышат"], past:["слышал","слышала","слышало","слышали"],
+    noteP:"-ать ilə bitsə də ш-dan sonra 2-ci təsrif kimi davranır (istisna).", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + слышать." },
+  "слушать": { present:["слушаю","слушаешь","слушает","слушаем","слушаете","слушают"], past:["слушал","слушала","слушало","слушали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + слушать." },
+  "понимать": { present:["понимаю","понимаешь","понимает","понимаем","понимаете","понимают"], past:["понимал","понимала","понимало","понимали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + понимать." },
+  "хотеть": { present:["хочу","хочешь","хочет","хотим","хотите","хотят"], past:["хотел","хотела","хотело","хотели"],
+    noteP:"Qarışıq təsrif — tək say т→ч, cəm say adi qalır.", noteT:"Keçmişdə sadə qəlibə qayıdır.", noteF:"буду/будешь... + хотеть." },
+  "мочь": { present:["могу","можешь","может","можем","можете","могут"], past:["мог","могла","могло","могли"],
+    noteP:"Qeyri-müntəzəm: г/ж dəyişir.", noteT:"Kişi cinsində л düşür: мог.", noteF:"буду/будешь... + мочь." },
+  "любить": { present:["люблю","любишь","любит","любим","любите","любят"], past:["любил","любила","любило","любили"],
+    noteP:"Yalnız я formasında л hərfi əlavə olunur.", noteT:"Keçmişdə əlavə л yoxdur.", noteF:"буду/будешь... + любить." },
+  "есть": { present:["ем","ешь","ест","едим","едите","едят"], past:["ел","ела","ело","ели"],
+    noteP:"Tam qeyri-müntəzəm feil, əzbərlənməlidir.", noteT:"Keçmişdə nisbətən sadədir.", noteF:"буду/будешь... + есть." },
+  "пить": { present:["пью","пьёшь","пьёт","пьём","пьёте","пьют"], past:["пил","пила","пило","пили"],
+    noteP:"Kökə ь əlavə olunur (пь-).", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + пить." },
+  "спать": { present:["сплю","спишь","спит","спим","спите","спят"], past:["спал","спала","спало","спали"],
+    noteP:"2-ci təsrif, я formasında л əlavə olunur.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + спать." },
+  "вставать": { present:["встаю","встаёшь","встаёт","встаём","встаёте","встают"], past:["вставал","вставала","вставало","вставали"],
+    noteP:"-авать qrupu: indiki zamanda -ва- düşür.", noteT:"Keçmişdə -ва- qalır: вставал-.", noteF:"буду/будешь... + вставать." },
+  "работать": { present:["работаю","работаешь","работает","работаем","работаете","работают"], past:["работал","работала","работало","работали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + работать." },
+  "учиться": { present:["учусь","учишься","учится","учимся","учитесь","учатся"], past:["учился","училась","училось","учились"],
+    noteP:"Refleksiv 2-ci təsrif (-ся ilə).", noteT:"Cinsə görə -ся/-сь dəyişir: учился/училась.", noteF:"буду/будешь... + учиться." },
+  "читать": { present:["читаю","читаешь","читает","читаем","читаете","читают"], past:["читал","читала","читало","читали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + читать." },
+  "писать": { present:["пишу","пишешь","пишет","пишем","пишете","пишут"], past:["писал","писала","писало","писали"],
+    noteP:"с → ш dəyişir, yalnız indiki zamanda.", noteT:"Keçmişdə kök orijinal qalır: писал-.", noteF:"буду/будешь... + писать." },
+  "играть": { present:["играю","играешь","играет","играем","играете","играют"], past:["играл","играла","играло","играли"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + играть." },
+  "жить": { present:["живу","живёшь","живёт","живём","живёте","живут"], past:["жил","жила","жило","жили"],
+    noteP:"Kök жив- olur, infinitivdəki жи- yox.", noteT:"Keçmişdə kök sadədir: жил-.", noteF:"буду/будешь... + жить." },
+  "покупать": { present:["покупаю","покупаешь","покупает","покупаем","покупаете","покупают"], past:["покупал","покупала","покупало","покупали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + покупать." },
+  "продавать": { present:["продаю","продаёшь","продаёт","продаём","продаёте","продают"], past:["продавал","продавала","продавало","продавали"],
+    noteP:"-авать qrupu: indiki zamanda -ва- düşür.", noteT:"Keçmişdə -ва- qalır.", noteF:"буду/будешь... + продавать." },
+  "платить": { present:["плачу","платишь","платит","платим","платите","платят"], past:["платил","платила","платило","платили"],
+    noteP:"т → ч dəyişir, yalnız я formasında.", noteT:"Keçmişdə т qayıdır: платил-.", noteF:"буду/будешь... + платить." },
+  "готовить": { present:["готовлю","готовишь","готовит","готовим","готовите","готовят"], past:["готовил","готовила","готовило","готовили"],
+    noteP:"в → вл dəyişir, yalnız я formasında.", noteT:"Keçmişdə əlavə л yoxdur.", noteF:"буду/будешь... + готовить." },
+  "мыться": { present:["моюсь","моешься","моется","моемся","моетесь","моются"], past:["мылся","мылась","мылось","мылись"],
+    noteP:"Refleksiv, kök мо- + й.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + мыться." },
+  "одеваться": { present:["одеваюсь","одеваешься","одевается","одеваемся","одеваетесь","одеваются"], past:["одевался","одевалась","одевалось","одевались"],
+    noteP:"Müntəzəm -ать refleksiv qrupu.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + одеваться." },
+  "спрашивать": { present:["спрашиваю","спрашиваешь","спрашивает","спрашиваем","спрашиваете","спрашивают"], past:["спрашивал","спрашивала","спрашивало","спрашивали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + спрашивать." },
+  "отвечать": { present:["отвечаю","отвечаешь","отвечает","отвечаем","отвечаете","отвечают"], past:["отвечал","отвечала","отвечало","отвечали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + отвечать." },
+  "просить": { present:["прошу","просишь","просит","просим","просите","просят"], past:["просил","просила","просило","просили"],
+    noteP:"с → ш dəyişir, yalnız я formasında.", noteT:"Keçmişdə с qayıdır: просил-.", noteF:"буду/будешь... + просить." },
+  "помогать": { present:["помогаю","помогаешь","помогает","помогаем","помогаете","помогают"], past:["помогал","помогала","помогало","помогали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + помогать." },
+  "ждать": { present:["жду","ждёшь","ждёт","ждём","ждёте","ждут"], past:["ждал","ждала","ждало","ждали"],
+    noteP:"Qeyri-müntəzəm, qısa kök.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + ждать." },
+  "искать": { present:["ищу","ищешь","ищет","ищем","ищете","ищут"], past:["искал","искала","искало","искали"],
+    noteP:"к → щ dəyişir indiki zamanda.", noteT:"Keçmişdə к qayıdır: искал-.", noteF:"буду/будешь... + искать." },
+  "находить": { present:["нахожу","находишь","находит","находим","находите","находят"], past:["находил","находила","находило","находили"],
+    noteP:"д → ж dəyişir, yalnız я formasında.", noteT:"Keçmişdə д qayıdır.", noteF:"буду/будешь... + находить." },
+  "терять": { present:["теряю","теряешь","теряет","теряем","теряете","теряют"], past:["терял","теряла","теряло","теряли"],
+    noteP:"Müntəzəm -ять qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + терять." },
+  "радоваться": { present:["радуюсь","радуешься","радуется","радуемся","радуетесь","радуются"], past:["радовался","радовалась","радовалось","радовались"],
+    noteP:"-овать qrupu: -ова- → -у- dəyişir indiki zamanda.", noteT:"Keçmişdə -ова- qalır.", noteF:"буду/будешь... + радоваться." },
+  "бояться": { present:["боюсь","боишься","боится","боимся","боитесь","боятся"], past:["боялся","боялась","боялось","боялись"],
+    noteP:"Refleksiv 2-ci təsrif.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + бояться." },
+  "плакать": { present:["плачу","плачешь","плачет","плачем","плачете","плачут"], past:["плакал","плакала","плакало","плакали"],
+    noteP:"к → ч dəyişir indiki zamanda.", noteT:"Keçmişdə к qayıdır: плакал-.", noteF:"буду/будешь... + плакать." },
+  "смеяться": { present:["смеюсь","смеёшься","смеётся","смеёмся","смеётесь","смеются"], past:["смеялся","смеялась","смеялось","смеялись"],
+    noteP:"Refleksiv -ять qrupu, kökə й əlavə olunur.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + смеяться." },
+  "нравиться": { present:["нравлюсь","нравишься","нравится","нравимся","нравитесь","нравятся"], past:["нравился","нравилась","нравилось","нравились"],
+    noteP:"в → вл dəyişir, yalnız я formasında. Adətən yalnız 3-cü şəxsdə işlədilir.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + нравиться." },
+  "начинать": { present:["начинаю","начинаешь","начинает","начинаем","начинаете","начинают"], past:["начинал","начинала","начинало","начинали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + начинать." },
+  "заканчивать": { present:["заканчиваю","заканчиваешь","заканчивает","заканчиваем","заканчиваете","заканчивают"], past:["заканчивал","заканчивала","заканчивало","заканчивали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + заканчивать." },
+  "продолжать": { present:["продолжаю","продолжаешь","продолжает","продолжаем","продолжаете","продолжают"], past:["продолжал","продолжала","продолжало","продолжали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + продолжать." },
+  "открывать": { present:["открываю","открываешь","открывает","открываем","открываете","открывают"], past:["открывал","открывала","открывало","открывали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + открывать." },
+  "закрывать": { present:["закрываю","закрываешь","закрывает","закрываем","закрываете","закрывают"], past:["закрывал","закрывала","закрывало","закрывали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + закрывать." },
+  "давать": { present:["даю","даёшь","даёт","даём","даёте","дают"], past:["давал","давала","давало","давали"],
+    noteP:"-авать qrupu: indiki zamanda -ва- düşür.", noteT:"Keçmişdə -ва- qalır.", noteF:"буду/будешь... + давать." },
+  "брать": { present:["беру","берёшь","берёт","берём","берёте","берут"], past:["брал","брала","брало","брали"],
+    noteP:"Qeyri-müntəzəm kök: брать → бер-.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + брать." },
+  "приходить": { present:["прихожу","приходишь","приходит","приходим","приходите","приходят"], past:["приходил","приходила","приходило","приходили"],
+    noteP:"д → ж dəyişir, yalnız я formasında.", noteT:"Keçmişdə д qayıdır.", noteF:"буду/будешь... + приходить." },
+  "уходить": { present:["ухожу","уходишь","уходит","уходим","уходите","уходят"], past:["уходил","уходила","уходило","уходили"],
+    noteP:"д → ж dəyişir, yalnız я formasında.", noteT:"Keçmişdə д qayıdır.", noteF:"буду/будешь... + уходить." },
+  "оставаться": { present:["остаюсь","остаёшься","остаётся","остаёмся","остаётесь","остаются"], past:["оставался","оставалась","оставалось","оставались"],
+    noteP:"-авать qrupu, refleksiv.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + оставаться." },
+  "становиться": { present:["становлюсь","становишься","становится","становимся","становитесь","становятся"], past:["становился","становилась","становилось","становились"],
+    noteP:"в → вл dəyişir, yalnız я formasında.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + становиться." },
+
+  "звонить": { present:["звоню","звонишь","звонит","звоним","звоните","звонят"], past:["звонил","звонила","звонило","звонили"],
+    noteP:"Müntəzəm -ить qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + звонить." },
+  "встречаться": { present:["встречаюсь","встречаешься","встречается","встречаемся","встречаетесь","встречаются"], past:["встречался","встречалась","встречалось","встречались"],
+    noteP:"Müntəzəm -ать refleksiv qrupu.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + встречаться." },
+  "узнавать": { present:["узнаю","узнаёшь","узнаёт","узнаём","узнаёте","узнают"], past:["узнавал","узнавала","узнавало","узнавали"],
+    noteP:"-авать qrupu: indiki zamanda -ва- düşür.", noteT:"Keçmişdə -ва- qalır.", noteF:"буду/будешь... + узнавать." },
+  "забывать": { present:["забываю","забываешь","забывает","забываем","забываете","забывают"], past:["забывал","забывала","забывало","забывали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + забывать." },
+  "вспоминать": { present:["вспоминаю","вспоминаешь","вспоминает","вспоминаем","вспоминаете","вспоминают"], past:["вспоминал","вспоминала","вспоминало","вспоминали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + вспоминать." },
+  "чувствовать": { present:["чувствую","чувствуешь","чувствует","чувствуем","чувствуете","чувствуют"], past:["чувствовал","чувствовала","чувствовало","чувствовали"],
+    noteP:"-овать qrupu: -ова- → -у- dəyişir.", noteT:"Keçmişdə -ова- qalır.", noteF:"буду/будешь... + чувствовать." },
+  "верить": { present:["верю","веришь","верит","верим","верите","верят"], past:["верил","верила","верило","верили"],
+    noteP:"Müntəzəm -ить qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + верить." },
+  "надеяться": { present:["надеюсь","надеешься","надеется","надеемся","надеетесь","надеются"], past:["надеялся","надеялась","надеялось","надеялись"],
+    noteP:"Refleksiv -ять qrupu.", noteT:"Cinsə görə -ся/-сь dəyişir.", noteF:"буду/будешь... + надеяться." },
+  "петь": { present:["пою","поёшь","поёт","поём","поёте","поют"], past:["пел","пела","пело","пели"],
+    noteP:"Qeyri-müntəzəm kök: петь → по-.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + петь." },
+  "танцевать": { present:["танцую","танцуешь","танцует","танцуем","танцуете","танцуют"], past:["танцевал","танцевала","танцевало","танцевали"],
+    noteP:"-евать qrupu: -ева- → -у- dəyişir.", noteT:"Keçmişdə -ева- qalır.", noteF:"буду/будешь... + танцевать." },
+  "рисовать": { present:["рисую","рисуешь","рисует","рисуем","рисуете","рисуют"], past:["рисовал","рисовала","рисовало","рисовали"],
+    noteP:"-овать qrupu: -ова- → -у- dəyişir.", noteT:"Keçmişdə -ова- qalır.", noteF:"буду/будешь... + рисовать." },
+  "путешествовать": { present:["путешествую","путешествуешь","путешествует","путешествуем","путешествуете","путешествуют"], past:["путешествовал","путешествовала","путешествовало","путешествовали"],
+    noteP:"-овать qrupu: -ова- → -у- dəyişir.", noteT:"Keçmişdə -ова- qalır.", noteF:"буду/будешь... + путешествовать." },
+  "гулять": { present:["гуляю","гуляешь","гуляет","гуляем","гуляете","гуляют"], past:["гулял","гуляла","гуляло","гуляли"],
+    noteP:"Müntəzəm -ять qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + гулять." },
+  "отдыхать": { present:["отдыхаю","отдыхаешь","отдыхает","отдыхаем","отдыхаете","отдыхают"], past:["отдыхал","отдыхала","отдыхало","отдыхали"],
+    noteP:"Müntəzəm -ать qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + отдыхать." },
+  "строить": { present:["строю","строишь","строит","строим","строите","строят"], past:["строил","строила","строило","строили"],
+    noteP:"Müntəzəm -ить qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + строить." },
+  "учить": { present:["учу","учишь","учит","учим","учите","учат"], past:["учил","учила","учило","учили"],
+    noteP:"Müntəzəm -ить qrupu.", noteT:"Standart keçmiş zaman qəlibi.", noteF:"буду/будешь... + учить." },
+};
+
+const TENSE_LABELS = { present:"İndiki zaman", past:"Keçmiş zaman", future:"Gələcək zaman" };
+let activeTense = "present";
+
+/* ===================== STATE ===================== */
+const STORE_KEY = "rus_verb_progress_v2";
+function loadProgress(){
+  try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {learned:{}, again:{}, quizBest:0}; }
+  catch(e){ return {learned:{}, again:{}, quizBest:0}; }
+}
+function saveProgress(){ localStorage.setItem(STORE_KEY, JSON.stringify(progress)); }
+let progress = loadProgress();
+
+let activeCat = "all";
+let searchTerm = "";
+let deck = [];
+let cardPos = 0;
+let flipped = false;
+
+function verbId(v){ return v.ru; }
+
+function matchesSearch(v){
+  if(!searchTerm) return true;
+  const t = searchTerm.toLowerCase();
+  return v.ru.toLowerCase().includes(t) || v.az.toLowerCase().includes(t) || v.tr.toLowerCase().includes(t);
+}
+
+function buildDeck(){
+  deck = VERBS.filter(v => (activeCat==="all" || v.cat===activeCat) && matchesSearch(v));
+  if(deck.length===0) deck = VERBS.slice();
+  cardPos = 0;
+  flipped = false;
+  renderCard();
+}
+
+function renderChips(containerId, onSelect){
+  const el = document.getElementById(containerId);
+  el.innerHTML = "";
+  const allChip = document.createElement("button");
+  allChip.className = "chip" + (activeCat==="all" ? " active":"");
+  allChip.textContent = "Hamısı";
+  allChip.onclick = () => { activeCat="all"; refreshAllChips(); onSelect(); };
+  el.appendChild(allChip);
+  Object.keys(CATS).forEach(key=>{
+    const c = document.createElement("button");
+    c.className = "chip" + (activeCat===key ? " active":"");
+    c.textContent = CATS[key];
+    c.onclick = () => { activeCat=key; refreshAllChips(); onSelect(); };
+    el.appendChild(c);
+  });
+}
+function refreshAllChips(){
+  renderChips("catChips", buildDeck);
+  renderChips("catChips2", renderGrid);
+}
+
+function renderCard(){
+  const v = deck[cardPos];
+  const idx = String(cardPos+1).padStart(2,"0");
+  document.getElementById("cardIdx").textContent = idx;
+  document.getElementById("cardIdxB").textContent = idx;
+  document.getElementById("cardCat").textContent = CATS[v.cat].toUpperCase();
+  document.getElementById("cardCatB").textContent = CATS[v.cat].toUpperCase();
+  document.getElementById("cardRu").textContent = v.ru;
+  document.getElementById("cardTranslit").textContent = v.tr;
+  document.getElementById("cardTranslitB").textContent = v.tr;
+  document.getElementById("cardAz").textContent = v.az;
+  document.getElementById("cardExample").textContent = v.ex;
+  document.getElementById("flashcard").classList.remove("flipped");
+  flipped = false;
+  document.getElementById("toConjBtn").onclick = (e)=>{ e.stopPropagation(); gotoConjugation(v.ru); };
+  updateProgressBar();
+}
+
+function updateProgressBar(){
+  const total = deck.length;
+  const learnedInDeck = deck.filter(v => progress.learned[verbId(v)]).length;
+  document.getElementById("progFill").style.width = total ? (learnedInDeck/total*100)+"%" : "0%";
+  document.getElementById("progTxt").textContent = learnedInDeck + " / " + total + " öyrənilib";
+  document.getElementById("statLearned").textContent = Object.keys(progress.learned).length;
+}
+
+document.getElementById("flashcard").addEventListener("click", ()=>{
+  flipped = !flipped;
+  document.getElementById("flashcard").classList.toggle("flipped", flipped);
+});
+document.getElementById("nextBtn").onclick = ()=>{ cardPos = (cardPos+1) % deck.length; renderCard(); };
+document.getElementById("prevBtn").onclick = ()=>{ cardPos = (cardPos-1+deck.length) % deck.length; renderCard(); };
+document.getElementById("knowBtn").onclick = ()=>{
+  const v = deck[cardPos];
+  progress.learned[verbId(v)] = true;
+  delete progress.again[verbId(v)];
+  saveProgress();
+  cardPos = (cardPos+1) % deck.length;
+  renderCard();
+  renderGrid();
+};
+document.getElementById("againBtn").onclick = ()=>{
+  const v = deck[cardPos];
+  progress.again[verbId(v)] = true;
+  delete progress.learned[verbId(v)];
+  saveProgress();
+  cardPos = (cardPos+1) % deck.length;
+  renderCard();
+  renderGrid();
+};
+
+/* ---------- BROWSE GRID ---------- */
+document.getElementById("searchBox").addEventListener("input", (e)=>{
+  searchTerm = e.target.value;
+  renderGrid();
+});
+
+function renderGrid(){
+  const list = VERBS.filter(v => (activeCat==="all" || v.cat===activeCat) && matchesSearch(v));
+  const grid = document.getElementById("verbGrid");
+  grid.innerHTML = "";
+  if(list.length===0){
+    grid.innerHTML = '<div style="padding:24px;color:var(--muted);font-size:14px;">Heç bir nəticə tapılmadı.</div>';
+    return;
+  }
+  list.forEach(v=>{
+    const cell = document.createElement("div");
+    cell.className = "verb-cell" + (progress.learned[verbId(v)] ? " learned":"");
+    cell.innerHTML = `<button class="clock-btn" title="Bütün zamanlar">🕐</button><div class="vru">${v.ru}</div><div class="vtr mono">${v.tr}</div><div class="vaz">${v.az}</div>`;
+    cell.querySelector(".vru").onclick = ()=>{
+      activeCat = v.cat;
+      refreshAllChips();
+      buildDeck();
+      cardPos = deck.findIndex(d=>d.ru===v.ru);
+      if(cardPos<0) cardPos=0;
+      renderCard();
+      document.getElementById("cards").scrollIntoView({behavior:"smooth"});
+    };
+    cell.querySelector(".clock-btn").onclick = ()=> gotoConjugation(v.ru);
+    grid.appendChild(cell);
+  });
+}
+
+/* ---------- NAV ---------- */
+document.querySelectorAll(".navlinks button").forEach(btn=>{
+  btn.onclick = ()=>{
+    document.querySelectorAll(".navlinks button").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.go).scrollIntoView({behavior:"smooth"});
+  };
+});
+
+/* ===================== QUIZ ===================== */
+let quizPool = [];
+let quizIdx = 0;
+let quizScore = 0;
+let quizStreak = 0;
+const QUIZ_LEN = 10;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function startQuiz(){
+  quizPool = shuffle(VERBS).slice(0, QUIZ_LEN);
+  quizIdx = 0; quizScore = 0; quizStreak = 0;
+  document.getElementById("quizTotal").textContent = QUIZ_LEN;
+  renderQuizQ();
+}
+
+function renderQuizQ(){
+  document.getElementById("quizNextBtn").style.display = "none";
+  if(quizIdx >= quizPool.length){
+    document.getElementById("quizWord").textContent = "Bitdi! 🎉";
+    document.getElementById("quizOpts").innerHTML = `<div style="text-align:center;font-family:'PT Mono';font-size:13px;color:var(--muted);">Nəticə: ${quizScore} / ${quizPool.length}</div>`;
+    const nb = document.getElementById("quizNextBtn");
+    nb.style.display="inline-block";
+    nb.textContent = "Yenidən başla ↻";
+    nb.onclick = startQuiz;
+    if(quizScore > progress.quizBest){ progress.quizBest = quizScore; saveProgress(); }
+    return;
+  }
+  const v = quizPool[quizIdx];
+  document.getElementById("quizN").textContent = quizIdx+1;
+  document.getElementById("quizWord").textContent = v.ru;
+  document.getElementById("quizScore").textContent = "XAL: " + quizScore;
+  document.getElementById("quizStreak").textContent = quizStreak;
+
+  const wrongPool = shuffle(VERBS.filter(x=>x.ru!==v.ru)).slice(0,3).map(x=>x.az);
+  const options = shuffle([v.az, ...wrongPool]);
+  const optsEl = document.getElementById("quizOpts");
+  optsEl.innerHTML = "";
+  const keys = ["A","B","C","D"];
+  options.forEach((opt,i)=>{
+    const b = document.createElement("button");
+    b.className = "quiz-opt";
+    b.innerHTML = `<span class="k">${keys[i]}</span> ${opt}`;
+    b.onclick = ()=> handleQuizAnswer(b, opt, v.az, optsEl);
+    optsEl.appendChild(b);
+  });
+  document.getElementById("quizNextBtn").onclick = ()=>{ quizIdx++; renderQuizQ(); };
+}
+
+function handleQuizAnswer(btn, chosen, correct, optsEl){
+  optsEl.querySelectorAll(".quiz-opt").forEach(o=>o.onclick=null);
+  if(chosen === correct){
+    btn.classList.add("correct");
+    quizScore++; quizStreak++;
+  }else{
+    btn.classList.add("wrong");
+    quizStreak = 0;
+    optsEl.querySelectorAll(".quiz-opt").forEach(o=>{
+      if(o.textContent.trim().endsWith(correct)) o.classList.add("correct");
+    });
+  }
+  document.getElementById("quizScore").textContent = "XAL: " + quizScore;
+  document.getElementById("quizStreak").textContent = quizStreak;
+  document.getElementById("quizNextBtn").style.display = "inline-block";
+}
+
+/* ===================== CONJUGATION ===================== */
+function renderConjSelect(){
+  const sel = document.getElementById("conjSelect");
+  sel.innerHTML = "";
+  VERBS.forEach(v=>{
+    const opt = document.createElement("option");
+    opt.value = v.ru;
+    opt.textContent = v.ru + " — " + v.az;
+    sel.appendChild(opt);
+  });
+  sel.onchange = ()=> renderConj(sel.value);
+}
+
+function renderTenseChips(){
+  const tEl = document.getElementById("tenseChips");
+  tEl.innerHTML = "";
+  Object.keys(TENSE_LABELS).forEach(key=>{
+    const t = document.createElement("button");
+    t.className = "chip" + (key===activeTense ? " active":"");
+    t.textContent = TENSE_LABELS[key];
+    t.onclick = ()=>{
+      activeTense = key;
+      tEl.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
+      t.classList.add("active");
+      renderConj(document.getElementById("conjSelect").value);
+    };
+    tEl.appendChild(t);
+  });
+}
+
+function gotoConjugation(verbRu){
+  document.getElementById("conjSelect").value = verbRu;
+  renderConj(verbRu);
+  document.getElementById("conj").scrollIntoView({behavior:"smooth"});
+}
+
+function renderConj(verb){
+  const data = CONJ[verb];
+  const table = document.getElementById("conjTable");
+  const emptyEl = document.getElementById("conjEmpty");
+  emptyEl.style.display = "none";
+  table.style.display = "table";
+
+  if(activeTense === "present"){
+    if(data.present === null){
+      table.style.display = "none";
+      emptyEl.style.display = "block";
+      emptyEl.textContent = "⚠ " + (verb==="быть" ? "быть feili indiki zamanda demək olar istifadə olunmur." : "Bu feil perfektivdir, ona görə indiki zamanı yoxdur — yalnız Keçmiş və Gələcək zamana baxa bilərsən.");
+      document.getElementById("conjNote").textContent = "✎ " + data.noteP;
+      return;
+    }
+    const pron = ["я","ты","он / она","мы","вы","они"];
+    table.innerHTML = "<tr><th>Əvəzlik</th><th>Forma</th></tr>" +
+      data.present.map((f,i)=>`<tr><td class="pron">${pron[i]}</td><td class="form">${f}</td></tr>`).join("");
+    document.getElementById("conjNote").textContent = "✎ " + data.noteP;
+  } else if(activeTense === "past"){
+    const pron = ["он","она","оно","они / мы / вы"];
+    table.innerHTML = "<tr><th>Cins / Say</th><th>Forma</th></tr>" +
+      data.past.map((f,i)=>`<tr><td class="pron">${pron[i]}</td><td class="form">${f}</td></tr>`).join("");
+    document.getElementById("conjNote").textContent = "✎ " + data.noteT;
+  } else {
+    const pron = ["я","ты","он / она","мы","вы","они"];
+    let forms;
+    if(data.futureForms){
+      forms = data.futureForms;
+    } else {
+      const aux = ["буду","будешь","будет","будем","будете","будут"];
+      forms = aux.map(a => a + " " + verb);
+    }
+    table.innerHTML = "<tr><th>Əvəzlik</th><th>Forma</th></tr>" +
+      pron.map((p,i)=>`<tr><td class="pron">${p}</td><td class="form">${forms[i]}</td></tr>`).join("");
+    document.getElementById("conjNote").textContent = "✎ " + data.noteF;
+  }
+}
+
+/* ===================== BOOT ===================== */
+document.getElementById("statTotal").textContent = VERBS.length;
+document.getElementById("statCat").textContent = Object.keys(CATS).length;
+refreshAllChips();
+buildDeck();
+renderGrid();
+startQuiz();
+renderConjSelect();
+renderTenseChips();
+renderConj(VERBS[0].ru);
+</script>
+</body>
+</html>
